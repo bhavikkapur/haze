@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototypes — HAZE V0 sensing hardware</title>
+<meta name="description" content="Hardware, sensors and progress on HAZE Prototype V0 — a first attempt at a low-cost pollution sensing device." />
+<meta property="og:title" content="HAZE Prototypes — V0" />
+<meta property="og:description" content="Hardware, sensors, challenges and development progress for the first HAZE prototype." />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu">≡</button>
+    <nav class="nav-links">
+      <a href="/home.html">Home</a>
+      <a href="/journal.html">Journal</a>
+      <a href="/prototypes.html">Prototypes</a>
+      <a href="/roadmap.html">Roadmap</a>
+      <a href="/about.html">About</a>
+      <a class="gh" href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="container" style="padding-top:140px; padding-bottom:40px">
+    <span class="section-eyebrow">Prototypes</span>
+    <h1 class="section-title" style="font-size:clamp(36px,5vw,60px)">Hardware built in the open.</h1>
+    <p class="section-lead">Each prototype is a step, not a product. Documented with what worked, what broke, and what comes next.</p>
+
+    <div class="proto-card reveal">
+      <div class="proto-head">
+        <div>
+          <h2 class="proto-title">Prototype V0</h2>
+          <p class="proto-subtitle">First sensing prototype · learning platform</p>
+        </div>
+        <span class="badge"><span class="pulse"></span> In Development</span>
+      </div>
+
+      <div class="proto-grid">
+        <div class="proto-block">
+          <h4>Hardware</h4>
+          <ul>
+            <li>Microcontroller <span>ESP32 (planned)</span></li>
+            <li>Particulate sensor <span>PMS5003</span></li>
+            <li>Gas sensor <span>MiCS-6814</span></li>
+            <li>Environment <span>BME280</span></li>
+            <li>Enclosure <span>3D printed</span></li>
+          </ul>
+        </div>
+        <div class="proto-block">
+          <h4>Current challenges</h4>
+          <ul>
+            <li>Sensor calibration <span>Open</span></li>
+            <li>Power management <span>Open</span></li>
+            <li>Weatherproofing <span>Open</span></li>
+            <li>Data pipeline <span>Sketch</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="frame">IMG · 01</div>
+        <div class="frame">IMG · 02</div>
+        <div class="frame">IMG · 03</div>
+      </div>
+
+      <div class="progress"><span data-value="12%"></span></div>
+      <div class="progress-label"><span>Development progress</span><span>12%</span></div>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <span class="section-eyebrow">Future prototypes</span>
+    <h2 class="section-title">What comes after V0.</h2>
+    <div class="future-list">
+      <div class="item">
+        <span class="tag">V1</span>
+        <h5>Outdoor unit</h5>
+        <p>A ruggedised, weatherproof sensing node designed for continuous outdoor deployment.</p>
+      </div>
+      <div class="item">
+        <span class="tag">V2</span>
+        <h5>Mesh network</h5>
+        <p>Multiple units communicating to triangulate pollution events across a neighbourhood.</p>
+      </div>
+      <div class="item">
+        <span class="tag">V3</span>
+        <h5>Source attribution</h5>
+        <p>On-device analysis attempting to distinguish traffic, industrial and biomass signatures.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="brand">HAZE<span class="dot">.</span></div>
+      <p>Built in public · MIT License</p>
+    </div>
+    <div class="footer-links">
+      <a href="/journal.html">Journal</a>
+      <a href="/prototypes.html">Prototypes</a>
+      <a href="/roadmap.html">Roadmap</a>
+      <a href="/about.html">About</a>
+      <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
