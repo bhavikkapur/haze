@@ -40,7 +40,7 @@
 
     <div class="journal-list">
       <a class="log-card reveal" href="#001">
-        <div class="log-meta"><span class="num">001</span>22 Jul 2026 · 3 min read</div>
+        <div class="log-meta"><span class="num">001</span>22 Jul 2026 · update</div>
         <div class="log-body">
           <h3>The Beginning</h3>
           <p> It was when I saw construction sites in my area with visible dust emissions and uncovered sites with no accountability that the idea clicked. I wanted the residents living nearby and the construction workers whose health was compromised to be able to take action. 
@@ -48,35 +48,174 @@ While air quality monitoring websites did exist they did not attribute pollution
 
 </p>
         </div>
-        <div class="log-cta">Read more →</div>
       </a>
 
       <a class="log-card reveal" href="#002">
-        <div class="log-meta"><span class="num">002</span>23 Jul 2026 · 4 min read</div>
+        <div class="log-meta"><span class="num">002</span>22 Jul 2026 · update</div>
         <div class="log-body">
           <h3>The Problem</h3>
           <p>While working on this, I ran into a problem I hadn't anticipated. I realized that while particulate matter can be measured accurately, attributing it to a specific emission source in real time is a much harder and still a largely unsolved problem. This limitation makes it challenging to identify and hold individual emission sources accountable. Separating one construction site's contribution from traffic, other nearby sources, and background pollution turns out to be an ongoing research, not something I could solve through sensor placement, guesswork using wind direction or any sort of engineering alone. </p>
         </div>
-        <div class="log-cta">Read more →</div>
       </a>
 
       <a class="log-card reveal" href="#003">
-        <div class="log-meta"><span class="num">003</span>24 Jul 2026 · 2 min read</div>
+        <div class="log-meta"><span class="num">003</span>25 Jul 2026 · update</div>
         <div class="log-body">
           <h3>Respected sir..</h3>
           <p>I did my research, read preprints, and cold mailed the professor who had published work closely related to the problem I was facing. The first attempt at a mentor to help kickstart my project, ignored. However, that wouldnt stop me, i took that as a learning oppurtunity that taught me resilience I set out to start a journey, to learn from experience. </p>
         </div>
-        <div class="log-cta">Read more →</div>
       </a>
 
       <a class="log-card reveal" href="#004">
-        <div class="log-meta"><span class="num">004</span>25 Jul 2026 · 3 min read</div>
+        <div class="log-meta"><span class="num">004</span>25 Jul 2026 · update</div>
         <div class="log-body">
           <h3>Learning electronics from zero</h3>
           <p>From a blinking LED to a working PM sensor, this is where the journey begins.</p>
         </div>
-        <div class="log-cta">Read more →</div>
-      </a
+      </a>
+
+      <a class="log-card reveal" href="#005">
+        <div class="log-meta"><span class="num">005</span>1 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Lumped Abstractions</h3>
+          <p>The lumped abstraction is the hall pass that lets me draw circuits in the first place. It says that I can treat wires as ideal and ignore electromagnetic fields as long as the circuit is small compared to the wavelength of the signals in it. 9600 baud UART is a wavelength of kilometers, so a 15 cm sensor cable is just a wire . For HAZE that holds comfortably. It would not work for radio frequencies or very fast edges that I do not plan to use.</p>
+        </div>
+      </a>
+      <a class="log-card reveal" href="#006">
+        <div class="log-meta"><span class="num">006</span>2 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>UART/start bit</h3>
+          <p>UART does not have a clock wire, both ends agree on the baud rate and use their own timers to sample the incoming data. This is how PMS5003 and ESP32 communicate at 9600 baud without a clock line, the receiver resets its timer on the falling edge of the start bit for every byte. One bit is 104 µs long, meaning that the whole 10-bit frame takes 1.04 ms. If the baud rates are mismatched communication becomes impossible; TX on one end is RX on the other . The easiest test for a working connection is a loopback.</p>
+        </div>
+       </a>
+      
+      <a class="log-card reveal" href="#007">
+        <div class="log-meta"><span class="num">007</span>3 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Working of a scattering PM sensor</h3>
+          <p>The sensor shines a laser beam through an air sample and measures how much light is scattered by particles in it. The size of a particle contributes to define how much light is scattered to determine the size distribution. The signal is used to derive the mass concentration of particles under the assumption of a density and optical cross-section as well as a defined size distribution. PM2.5 is a mass concentration, and it has been extrapolated from this size distribution, so any other particles in the way will be counted as PM2.5 with reduced accuracy.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#008">
+        <div class="log-meta"><span class="num">008</span>4 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>KCL and KVL</h3>
+          <p>Most electronics is analyzed using Kirchhoff’s laws: conservation of charge gives me KCL, conservation of energy gives me KVL. These are used together to get a voltage divider, e.g. for ESP32 pins that are 3.3 V tolerant, if I have a 5 V signal this is a case for a divider, i.e. a pair of resistors that will bring the voltage down. A 10 kΩ and 20 kΩ resistor on 3.3 V will give me 2.2 V on the 20 kΩ resistor. For PMS5003 the 3.3 V is already the supply voltage; no need for a level shifter.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#009">
+        <div class="log-meta"><span class="num">009</span>5 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Manual decode of a PMS5003 packet</h3>
+          <p>The first two bytes of a PMS5003 packet are 0x42 followed by 0x4D, then there’s the length field and the payload with mass concentrations and particle counts, and a 16-bit checksum that is the sum of all previous bytes. The manual calculation of the checksum will help me confirm that the parser correctly processes the received data. The datasheet should specify which fields to use for the concentration calculation; the HAZE firmware will need to select between the standard and the atmospheric ones.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#010">
+        <div class="log-meta"><span class="num">010</span>6 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>ADC and quantization</h3>
+          <p>An N-bit ADC has 2^N intervals, with steps of approximately Vref / 2^N. For the 3.3 V 12-bit ESP32 it is 0.8 mV; anything finer is beyond the resolution and will not be captured by the ADC. The ESP32’s ADC is non-linear at the ends, so the calibration procedure uses a multimeter to find the conversion function from counts to volts. The same procedure is useful when working with a voltage divider: the divider’s output is only a fair representation of the measured voltage if it is not loaded by a too-high impedance.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#011">
+        <div class="log-meta"><span class="num">011</span>7 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Superposition and Thevenin/Norton</h3>
+          <p>It is easy to forget that when using linear circuits, I can convert any two-terminal network to a single current source and a parallel resistor. For example, a voltage divider of 3.3 V with 10 kΩ resistors becomes a 1.65 V source with a 5 kΩ resistor. Connecting a 10 kΩ load will give me 1.1 V across it. When driving an ADC, a high-impedance source needs to be attenuated; I should check the input impedance of the ADC to see if it is compatible with a voltage divider.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#012">
+        <div class="log-meta"><span class="num">012</span>8 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3> I2C and the BME280</h3>
+          <p>2C uses an open collector with a pull-up resistor for the clock, and another open collector for the data, and each device on the bus has an address. This is different from UART, but there is no baud-rate miss-match problem. To check what is on the bus, I can read the chip ID register: 0x60 is BME280, 0x58 is BMP280. This matters because a wrongly identified BMP280 does not have a humidity sensor, defeating the purpose of humidity compensation.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#013">
+        <div class="log-meta"><span class="num">013</span>9 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Capacitors and First order systems</h3>
+          <p>A capacitor does not allow for an instantaneous change in voltage. This means that the charging curve of an RC circuit is exponential, with a time constant of τ=RC. For R=10 kΩ and C=10 µF it is 0.1 s; the capacitor will have 63% of its final charge after 0.1 s, and 99% after 0.5 s. The same curve describes the response of a system to a step input. With a larger time constant it has better low-pass characteristics but worse lag, e.g. the PM2.5 averages. For my readings, a longer time constant may give a reasonable lag.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#014">
+        <div class="log-meta"><span class="num">014</span>10 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Sampling, timing, and warm up</h3>
+          <p>A timestamp is only as good as the moment when it has been recorded. When I stamp a packet with a time when it arrives, the processing delay is added on top of the propagation delay. The contents of the packet may need more time to stabilize: The PMS5003 averages over some time to get a reading. The same sensor has to be warmed up, and the first samples should be discarded. The distribution of the time between consecutive samples demonstrates the quality of the sampling process.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#015">
+        <div class="log-meta"><span class="num">015</span>11 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Humidity sensitivity</h3>
+          <p>The size of hygroscopic particles depends on the ambient humidity. A particle of dust will absorb water and become significantly larger under high RH. The same particle will scatter more light, and therefore an optical sensor will report a higher mass concentration of particles. This is a systematic effect that can be compensated with some information about humidity. This is why a BME280 is useful even if it is not used for temperature compensation.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#016">
+        <div class="log-meta"><span class="num">016</span>12 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Critical reading of the datasheet</h3>
+          <p>A datasheet only provides guarantees, it does not include what may go wrong. Typical accuracy figures and their conditions do not include humidity effects, long-term stability, or variations between units. Everything not stated is a possibility, and I should test the sensor for these failure modes. It will give me a page to write about the limitations of the sensor.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#017">
+        <div class="log-meta"><span class="num">017</span>13 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Sinusoidal steady-state</h3>
+          <p>Representing sinusoidal functions as phasors makes the analysis of linear circuits algebraic. The important part about phasors is that a circuit with a sinusoidal input of a given frequency responds with the same frequency, just a different amplitude and phase. For an RC circuit with a resistor and a capacitor in series, the magnitude of the response is 0.707 at the cutoff frequency and decreases at -20 dB per decade, and the phase lag is -45 degrees at the cutoff and approaches -90 degrees.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#018">
+        <div class="log-meta"><span class="num">018</span>14 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Accuracy, precision and bias</h3>
+          <p>Accuracy is about being close to the true value, but it has a bias component. Precision is repeatability; it equals the standard deviation of a set of measurements. A sensor can be accurate but have precision issues. Bias is rarely fixed, but can be partially addressed with calibration. Noise, on the other hand, is a precision issue but can be largely eliminated with averaging. I need to find the mean, standard deviation and bias of the sensor’s measurement.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#019">
+        <div class="log-meta"><span class="num">019</span>15 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>The impedence model</h3>
+          <p>Impedance model allows me to use the same approach for resistors, inductors and capacitors. For the latter two, impedance is a function of frequency: Z_C=jX_C=-j/ωC, Z_L=jX_L=jωL. This means that at DC a capacitor is an open circuit, and a capacitor at high frequencies is a short. This allows decoupling capacitors to filter out high-frequency noise while having no effect on a DC bias. The same model describes an RC circuit as a low-pass filter with a cutoff frequency f_c=1/(2πRC).</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#020">
+        <div class="log-meta"><span class="num">020</span>16 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Linear regression of my data</h3>
+          <p>The output of a linear regression with a line gives me a slope, an intercept and an R squared. The R squared is a measure of goodness of fit that indicates how much variance is accounted for by the fit line. However, it says little about the line itself, only that a poor fit has a low R squared. For this reason, a plot of residuals is more informative: a non-random pattern in them indicates that the model is incorrect; curvature, trends or other structures show that the model does not describe the data well. A model with a high R squared but a pattern in residuals is also not useful.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#021">
+        <div class="log-meta"><span class="num">021</span>17 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Filters</h3>
+          <p>A filter is a frequency-dependent voltage divider. Its cutoff frequency is determined by the point where its gain drops by 3 dB compared to the pass-band. For example, a 16 kΩ, 1 µF high-pass filter will have a gain of 0.2 at 50 Hz, attenuating mains noise, but will pass a slow sensor signal with a 10 Hz cutoff frequency. An equivalent digital filter would have the same characteristics, with the same trade-offs of lag and noise reduction.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#022">
+        <div class="log-meta"><span class="num">022</span>18 Aug 2026 · Learning outcome</div>
+        <div class="log-body">
+          <h3>Power up and deploy</h3>
+          <p>The fan and laser diode in the PMS5003 are the main power consumers, but the average current determines the lifetime of the laser diode. Duty-cycling the sensor reduces the average current, with a penalty of a longer warm-up period. Brownouts should be visible in the logged data. Decoupling capacitors help stabilize the power supply, and the impedance model tells me why a noisy rail leads to a noisy sensor.</p>
+        </div>
+      </a>
     </div>
   </section>
 </main>
