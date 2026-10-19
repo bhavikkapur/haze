@@ -106,7 +106,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#009">
-        <div class="log-meta"><span class="num">009</span>5 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">009</span>6 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Manual decode of a PMS5003 packet</h3>
           <p>The first two bytes of a PMS5003 packet are 0x42 followed by 0x4D, then there’s the length field and the payload with mass concentrations and particle counts, and a 16-bit checksum that is the sum of all previous bytes. The manual calculation of the checksum will help me confirm that the parser correctly processes the received data. The datasheet should specify which fields to use for the concentration calculation; the HAZE firmware will need to select between the standard and the atmospheric ones.</p>
@@ -114,7 +114,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#010">
-        <div class="log-meta"><span class="num">010</span>6 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">010</span>7 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>ADC and quantization</h3>
           <p>An N-bit ADC has 2^N intervals, with steps of approximately Vref / 2^N. For the 3.3 V 12-bit ESP32 it is 0.8 mV; anything finer is beyond the resolution and will not be captured by the ADC. The ESP32’s ADC is non-linear at the ends, so the calibration procedure uses a multimeter to find the conversion function from counts to volts. The same procedure is useful when working with a voltage divider: the divider’s output is only a fair representation of the measured voltage if it is not loaded by a too-high impedance.</p>
@@ -122,7 +122,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#011">
-        <div class="log-meta"><span class="num">011</span>7 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">011</span>8 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Superposition and Thevenin/Norton</h3>
           <p>It is easy to forget that when using linear circuits, I can convert any two-terminal network to a single current source and a parallel resistor. For example, a voltage divider of 3.3 V with 10 kΩ resistors becomes a 1.65 V source with a 5 kΩ resistor. Connecting a 10 kΩ load will give me 1.1 V across it. When driving an ADC, a high-impedance source needs to be attenuated; I should check the input impedance of the ADC to see if it is compatible with a voltage divider.</p>
@@ -130,7 +130,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#012">
-        <div class="log-meta"><span class="num">012</span>8 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">012</span>23 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3> I2C and the BME280</h3>
           <p>2C uses an open collector with a pull-up resistor for the clock, and another open collector for the data, and each device on the bus has an address. This is different from UART, but there is no baud-rate miss-match problem. To check what is on the bus, I can read the chip ID register: 0x60 is BME280, 0x58 is BMP280. This matters because a wrongly identified BMP280 does not have a humidity sensor, defeating the purpose of humidity compensation.</p>
@@ -138,7 +138,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#013">
-        <div class="log-meta"><span class="num">013</span>9 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">013</span>24 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Capacitors and First order systems</h3>
           <p>A capacitor does not allow for an instantaneous change in voltage. This means that the charging curve of an RC circuit is exponential, with a time constant of τ=RC. For R=10 kΩ and C=10 µF it is 0.1 s; the capacitor will have 63% of its final charge after 0.1 s, and 99% after 0.5 s. The same curve describes the response of a system to a step input. With a larger time constant it has better low-pass characteristics but worse lag, e.g. the PM2.5 averages. For my readings, a longer time constant may give a reasonable lag.</p>
@@ -146,7 +146,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#014">
-        <div class="log-meta"><span class="num">014</span>10 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">014</span>25 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Sampling, timing, and warm up</h3>
           <p>A timestamp is only as good as the moment when it has been recorded. When I stamp a packet with a time when it arrives, the processing delay is added on top of the propagation delay. The contents of the packet may need more time to stabilize: The PMS5003 averages over some time to get a reading. The same sensor has to be warmed up, and the first samples should be discarded. The distribution of the time between consecutive samples demonstrates the quality of the sampling process.</p>
@@ -154,7 +154,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#015">
-        <div class="log-meta"><span class="num">015</span>11 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">015</span>26 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Humidity sensitivity</h3>
           <p>The size of hygroscopic particles depends on the ambient humidity. A particle of dust will absorb water and become significantly larger under high RH. The same particle will scatter more light, and therefore an optical sensor will report a higher mass concentration of particles. This is a systematic effect that can be compensated with some information about humidity. This is why a BME280 is useful even if it is not used for temperature compensation.</p>
@@ -162,7 +162,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#016">
-        <div class="log-meta"><span class="num">016</span>12 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">016</span>27 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Critical reading of the datasheet</h3>
           <p>A datasheet only provides guarantees, it does not include what may go wrong. Typical accuracy figures and their conditions do not include humidity effects, long-term stability, or variations between units. Everything not stated is a possibility, and I should test the sensor for these failure modes. It will give me a page to write about the limitations of the sensor.</p>
@@ -170,7 +170,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#017">
-        <div class="log-meta"><span class="num">017</span>13 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">017</span>29 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Sinusoidal steady-state</h3>
           <p>Representing sinusoidal functions as phasors makes the analysis of linear circuits algebraic. The important part about phasors is that a circuit with a sinusoidal input of a given frequency responds with the same frequency, just a different amplitude and phase. For an RC circuit with a resistor and a capacitor in series, the magnitude of the response is 0.707 at the cutoff frequency and decreases at -20 dB per decade, and the phase lag is -45 degrees at the cutoff and approaches -90 degrees.</p>
@@ -178,7 +178,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#018">
-        <div class="log-meta"><span class="num">018</span>14 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">018</span>12 Sep 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Accuracy, precision and bias</h3>
           <p>Accuracy is about being close to the true value, but it has a bias component. Precision is repeatability; it equals the standard deviation of a set of measurements. A sensor can be accurate but have precision issues. Bias is rarely fixed, but can be partially addressed with calibration. Noise, on the other hand, is a precision issue but can be largely eliminated with averaging. I need to find the mean, standard deviation and bias of the sensor’s measurement.</p>
@@ -186,7 +186,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#019">
-        <div class="log-meta"><span class="num">019</span>15 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">019</span>13 Sep 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>The impedence model</h3>
           <p>Impedance model allows me to use the same approach for resistors, inductors and capacitors. For the latter two, impedance is a function of frequency: Z_C=jX_C=-j/ωC, Z_L=jX_L=jωL. This means that at DC a capacitor is an open circuit, and a capacitor at high frequencies is a short. This allows decoupling capacitors to filter out high-frequency noise while having no effect on a DC bias. The same model describes an RC circuit as a low-pass filter with a cutoff frequency f_c=1/(2πRC).</p>
@@ -194,7 +194,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#020">
-        <div class="log-meta"><span class="num">020</span>16 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">020</span>28 Sep 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Linear regression of my data</h3>
           <p>The output of a linear regression with a line gives me a slope, an intercept and an R squared. The R squared is a measure of goodness of fit that indicates how much variance is accounted for by the fit line. However, it says little about the line itself, only that a poor fit has a low R squared. For this reason, a plot of residuals is more informative: a non-random pattern in them indicates that the model is incorrect; curvature, trends or other structures show that the model does not describe the data well. A model with a high R squared but a pattern in residuals is also not useful.</p>
@@ -202,7 +202,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#021">
-        <div class="log-meta"><span class="num">021</span>17 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">021</span>29 Sep 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Filters</h3>
           <p>A filter is a frequency-dependent voltage divider. Its cutoff frequency is determined by the point where its gain drops by 3 dB compared to the pass-band. For example, a 16 kΩ, 1 µF high-pass filter will have a gain of 0.2 at 50 Hz, attenuating mains noise, but will pass a slow sensor signal with a 10 Hz cutoff frequency. An equivalent digital filter would have the same characteristics, with the same trade-offs of lag and noise reduction.</p>
@@ -210,12 +210,69 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#022">
-        <div class="log-meta"><span class="num">022</span>18 Aug 2026 · Learning outcome</div>
+        <div class="log-meta"><span class="num">022</span>30 Sep 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Power up and deploy</h3>
           <p>The fan and laser diode in the PMS5003 are the main power consumers, but the average current determines the lifetime of the laser diode. Duty-cycling the sensor reduces the average current, with a penalty of a longer warm-up period. Brownouts should be visible in the logged data. Decoupling capacitors help stabilize the power supply, and the impedance model tells me why a noisy rail leads to a noisy sensor.</p>
         </div>
       </a>
+
+      <a class="log-card reveal" href="#023">
+        <div class="log-meta"><span class="num">023</span>Oct 1 2026 · update</div>
+        <div class="log-body">
+          <h3>Multivariate regressions</h3>
+          <p>Adding predictors to a regression model allows me to separate their effects. The coefficients will show me how much each contributes to the outcome, controlling for the other variables. If the predictors are not independent, which can happen if they are temperature and humidity, I will need to take it into account. A change in the sign of a coefficient may indicate that something is wrong with the model.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#023">
+        <div class="log-meta"><span class="num">023</span>Oct 2 2026 · update</div>
+        <div class="log-body">
+          <h3>The op-amp abstraction</h3>
+          <p>An op-amp with negative feedback has a very high gain, which allows a circuit to have a predictable response based on resistors. Because of the high gain, the two inputs are at approximately the same voltage, and no current flows into the op-amp. This allows me to ignore their value and focus on the resistor ratios. The same abstraction allows me to build amplifiers, filters and other circuits. The op-amp model is good at describing amplifiers at low frequencies, but not near the supply rails, or when dealing with the input bias currents or the offset voltage.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#023">
+        <div class="log-meta"><span class="num">023</span>Oct 3 2026 · update</div>
+        <div class="log-body">
+          <h3>Error propagation and uncertainty</h3>
+          <p>Independent errors add up, but their contributions are squared and summed, not added directly. The individual terms dominate the sum, with the largest error determining the result. Every step I take adds uncertainty, including amplification or attenuation stages, calibration procedures and other steps. A calibrated measurement is not useful if I do not report an uncertainty.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#024">
+        <div class="log-meta"><span class="num">024</span>Oct 4 2026 · update</div>
+        <div class="log-body">
+          <h3>Op-amp circuits</h3>
+          <p>The basic circuits are a buffer, an inverting amplifier with gain -Rf/Rin, a non-inverting amplifier with gain 1+Rf/Rg, and a summing amplifier. Buffers are needed if a sensor cannot drive the next stage directly due to a high output impedance, and amplifiers provide additional gain. PMS5003 and BME280 sensors are digital and do not need them, but a sensor with an analog output may need an amplifier to increase its gain or offset. I should review the datasheet for such a sensor before working with it.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#025">
+        <div class="log-meta"><span class="num">025</span>Oct 8 2026 · update</div>
+        <div class="log-body">
+          <h3>Experimental design and train/test discipline</h3>
+          <p>Time-series data has temporal structure, and a random train/test split will lead to data leakage. A random split will have the test set be more similar to the training set, leading to overly optimistic results. To avoid this, time-series data should be split into contiguous blocks for training and testing. A colocated run should include a variety of conditions for the sensor, representing the range of humidity, temperature and PM values that it will encounter. The details of the run, including its duration and how the data will be split, must be determined ahead of time.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#026">
+        <div class="log-meta"><span class="num">026</span>Oct 8 2026 · update</div>
+        <div class="log-body">
+          <h3>Op-amps and positive feedback</h3>
+          <p>Positive feedback causes the output of an op-amp to saturate, and can be useful for creating comparators with hysteresis. Positive feedback is also used to create Schmitt triggers, which improves noise immunity by having different thresholds for the rising and falling edges. For example, a comparator with a 9 kΩ feedback resistor and a 1 kΩ resistor to ground on ±5 V rails will switch at -0.5 V and +0.5 V, giving it 1 V of hysteresis. This is more useful for signals that are noisy around a threshold than for digital signals, which is why HAZE is not a high priority.</p>
+        </div>
+      </a>
+
+      <a class="log-card reveal" href="#027">
+        <div class="log-meta"><span class="num">027</span>Oct 9 2026 · update</div>
+        <div class="log-body">
+          <h3>Cross-validation</h3>
+          <p>Cross-validation approximates the error of a model on unseen data by partitioning the data into segments and using each segment as a test set in turn. The cross-validated error can then be averaged across all segments. For time-series data, a cross-validation fold should be contiguous in time to avoid data leakage. By analogy with the train/test split, time-series data should be split using a block structure. In the next few lectures, I will analyze the effect of such a structure on the source attribution model.</p>
+        </div>
+      </a>
+      
     </div>
   </section>
 </main>
