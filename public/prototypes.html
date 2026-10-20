@@ -57,7 +57,7 @@ figure.shot {
 figure.shot img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 div.stage, figure.shot, figure.shot.has{
   border: none;
@@ -300,7 +300,10 @@ const core=[
 ];
 const data={
  v0:core,
- v1:core.concat([{t:"DIY Wind Vane",n:"Potentiometer + ADC",img:"images/windvane.jpg",d:"A rotating vane turns a potentiometer, producing a voltage that the ESP32 reads through an ADC pin. It is made with a low-friction shaft, vane and weather protection."}])
+ v1:core.concat([
+  {t:"DIY Wind Vane",n:"Potentiometer + ADC",img:"images/windvane.jpg",d:"A rotating vane turns a potentiometer, producing a voltage that the ESP32 reads through an ADC pin. It is made with a low-friction shaft, vane and weather protection."},
+  {t:"Spatiotemporal Map",n:"Spatial-Temporal Map",img:"images/map.jpg",d:"A live map visualizing how pollution levels evolve across space and time, combining distributed sensor readings with wind data to track pollutant dispersion, identify hotspots, and improve source attribution."}
+ ])
 };
 
 /* build feature blocks */
