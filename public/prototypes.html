@@ -1,98 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Prototypes — HAZE V0 sensing hardware</title>
-<meta name="description" content="Hardware, sensors and progress on HAZE Prototype V0 — a first attempt at a low-cost pollution sensing device." />
-<meta property="og:title" content="HAZE Prototypes — V0" />
-<meta property="og:description" content="Hardware, sensors, challenges and development progress for the first HAZE prototype." />
-<meta property="og:type" content="article" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAZE · Prototypes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0b;
+  --surface: #121214;
+  --ink: #f5f5f7;
+  --ink-2: #d8d8dc;
+  --muted: #8a8a92;
+  --muted-2: #5a5a62;
+  --line: #1e1e22;
+  --line-2: #2a2a30;
+  --accent: #4BA3FF;
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-lg: 28px;
+  --maxw: 1120px;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* aliases used by the prototype blocks below */
+  --teal: var(--accent); --amber: var(--accent);
+  --font: var(--font-sans); --mono: var(--font-mono);
+  --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:5rem;
+  --ease:cubic-bezier(.22,.8,.3,1);
+}
+html { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "ss01","cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+:focus-visible{outline:none solid var(--accent);outline-offset:3px;border-radius:4px}
 
+figure.shot {
+ background-color:#0a0a0b; 
+}
+figure.shot img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+div.stage, figure.shot, figure.shot.has{
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease, background .3s ease;
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  font-size: 14px;
+}
+.brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links a {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--muted);
+  border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+.nav-links a:hover { color: var(--ink); background: var(--line); }
+.nav-links a.active { color: var(--ink); }
+.nav-links a.gh { color: var(--ink); }
+.nav-toggle { display: none; background: none; border: 0; font-size: 20px; cursor: pointer; color: var(--ink); }
+@media (max-width: 780px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 100%; right: 20px; left: 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px;
+    flex-direction: column; align-items: stretch;
+    display: none;
+    box-shadow: 0 20px 60px -30px rgba(0,0,0,.15);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 14px; }
+}
+
+/* SECTIONS + HERO */
+section { padding: 120px 0; }
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
+  display: inline-block;
+}
+.hero { padding: 160px 0 140px; position: relative; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 0 0 20px;
+  max-width: 720px;
+}
+.hero p.lead {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 0 40px;
+  line-height: 1.5;
+}
+section.pv{padding:var(--s4) 0 var(--s5);border-top:1px solid var(--line)}
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--line); padding: 60px 0 50px; margin-top: 60px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.footer .brand { font-size: 20px; letter-spacing: 0.2em; }
+.footer p { color: var(--muted); margin: 8px 0 0; font-size: 14px; }
+.footer-links {
+  display: flex; gap: 22px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer-links a:hover { color: var(--ink); }
+::selection { background: color-mix(in oklab, var(--accent) 25%, transparent); color: var(--ink); }
+
+.tag{display:inline-block;font-family:var(--mono);font-size:.8rem;padding:.2rem .6rem;border:1px solid currentColor;border-radius:99px;color:var(--teal)}
+.v1 .tag{color:var(--amber)}
+h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:var(--s2) 0 var(--s3);font-weight:600;max-width:18ch}
+h2.wide{max-width:none}
+.lede{font-size:clamp(0.85rem,1.2vw,1.05rem);line-height:1.5;letter-spacing:-.01em;font-weight:400;max-width:62ch;margin:0 0 var(--s4)}
+.sub{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:600;letter-spacing:-.02em;margin:0 0 var(--s2)}
+ 
+/* horizontal word reveal (Skiper 72 style) */
+.lede.rv .w{opacity:calc(.12 + .58*var(--p,1))}
+.rv .w{display:inline-block;white-space:pre;opacity:calc(.14 + .86*var(--p,1));transform:translateX(calc((1 - var(--p,1))*-14px));will-change:opacity,transform}
+
+/* feature block (Skiper 76 style) */
+.feat{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--s4);align-items:stretch}
+.tabs{display:flex;flex-direction:column;gap:var(--s1)}
+.tab{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:background .2s,border-color .2s}
+.tab[data-on="true"]{border-color:var(--teal)}
+.v1 .tab[data-on="true"]{border-color:var(--amber)}
+.tab h3{margin:0;font-size:1rem}
+.tab button{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:center;gap:var(--s2);padding:1.1rem 1.3rem;cursor:pointer;font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.tab button:focus-visible{outline:3px solid var(--teal);outline-offset:-3px;border-radius:20px}
+.tab .num{font-family:var(--mono);font-size:.8rem;font-weight:400;color:var(--muted);min-width:2ch}
+.tab .plus{margin-left:auto;width:1.2rem;height:1.2rem;position:relative;flex:none}
+.tab .plus::before,.tab .plus::after{content:"";position:absolute;left:0;top:50%;width:100%;height:2px;background:currentColor;transition:transform .25s var(--ease)}
+.tab .plus::after{transform:rotate(90deg)}
+.tab[data-on="true"] .plus::after{transform:rotate(0)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
+.tab[data-on="true"] .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.body p{margin:0;padding:0 1.3rem 0 calc(1.3rem + 2ch + var(--s2));color:var(--muted);font-size:1.02rem}
+.body .part{display:block;font-family:var(--mono);font-size:.85rem;color:var(--teal);margin:0 1.3rem .5rem calc(1.3rem + 2ch + var(--s2))}
+.v1 .body .part{color:var(--amber)}
+.body p:last-child{padding-bottom:1.3rem}
+.stage{position:relative;min-height:420px;border-radius:28px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.shot{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.97);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
+.shot[data-on="true"]{opacity:1;transform:none;pointer-events:auto}
+.shot img{position:relative;z-index:1;max-width:86%;max-height:86%;object-fit:contain;border-radius:12px}
+.shot .ph{position:absolute;inset:var(--s3);display:grid;place-items:center;text-align:center;border:1.5px dashed var(--line);border-radius:18px;font-family:var(--mono);font-size:.85rem;color:var(--muted);padding:var(--s2)}
+.shot .ph b{display:block;font-family:var(--font);font-size:2rem;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.02em}
+.shot img[data-ok]{background:var(--surface)}
+.shot.has .ph{display:none}
+
+
+@media (max-width:820px){
+  .feat{grid-template-columns:1fr;gap:var(--s3)}
+  .stage{order:-1;min-height:300px}
+  .tab button{font-size:1.15rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv .w{opacity:1;transform:none}  
+  .lede.rv .w{opacity:.7}
+}
+</style>
 </head>
 <body>
-<header class="nav">
+
+<nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
-    <button class="nav-toggle" aria-label="Toggle menu">≡</button>
-    <nav class="nav-links">
-      <a href="/home.html">Home</a>
-      <a href="/journal.html">Journal</a>
-      <a href="/prototypes.html">Prototypes</a>
-      <a href="/roadmap.html">Roadmap</a>
-      <a href="/fellowship.html">Engineering Fellowship</a>
-      <a href="/about.html">About</a>
-      <a class="gh" href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </nav>
+    <a class="brand" href="home.html">HAZE<span class="dot">.</span></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">≡</button>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="journal.html">Journal</a>
+      <a href="prototypes.html" class="active" aria-current="page">Prototypes</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="fellowship.html">Engineering Fellowship</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/bhavikkapur/haze" class="gh" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
   </div>
-</header>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="section-eyebrow">Prototypes</div>
+    <h1>Inside the workshop</h1>
+    <p class="lead">Look into the haze workshop with each prototype and concept designed so far.</p>
+  </div>
+</section>
 
 <main>
-  <section class="container" style="padding-top:140px; padding-bottom:40px">
-    <span class="section-eyebrow">Prototypes</span>
-    <h1 class="section-title" style="font-size:clamp(36px,5vw,60px)">Hardware built in the open.</h1>
-    <p class="section-lead">Each prototype is a step, not a product. Documented with what worked, what broke, and what comes next.</p>
+<section class="pv v0" id="v0">
+  <div class="wrap">
+    <span class="tag">V0</span>
+    <h2 class="rv">Source attribution</h2>
+    <p class="lede rv">The prototype navigates source attribution through low cost sensor networks using reference grade sensor data and regression models to calibrate sensors, along with lab grade source labelled data that serve as ground truth for training ML models to analyse indirect features of particulate matter from the sensors and attribute them to relevant source labels.</p>
+    <div class="feat" data-set="v0"></div>
+  </div>
+</section>
 
-    <div class="proto-card reveal">
-      <div class="proto-head">
-        <div>
-          <h2 class="proto-title">Prototype V0</h2>
-          <p class="proto-subtitle">First sensing prototype · learning platform</p>
-        </div>
-        <span class="badge"><span class="pulse"></span> In Development</span>
-      </div>
-
-      <div class="proto-grid">
-        <div class="proto-block">
-          <h4>Hardware</h4>
-          <ul>
-            <li>Microcontroller <span>ESP32 (planned)</span></li>
-            <li>Particulate sensor <span>PMS5003</span></li>
-            <li>Gas sensor <span>MiCS-6814</span></li>
-            <li>Environment <span>BME280</span></li>
-            <li>Enclosure <span>3D printed</span></li>
-          </ul>
-        </div>
-        <div class="proto-block">
-          <h4>Current challenges</h4>
-          <ul>
-            <li>Gaining Acess to reference grade equipment for sensor galibration<span>Open</span></li>
-            <li>Gaining access to lab grade source samples for ML modelling<span>Open</span></li>
-          </ul>
-        </div>
-        <p>The prototype navigates source attribution through low cost sensor networks using reference grade sensor data and regression models to calibrate sensors along with lab grade source labelled data that serve as ground truth for training ML models to analyse indirect features of particulate matter from the sensors and attribute them to relevant source labels</p>
-      </div>
-
-      <div class="gallery">
-        <div class="frame">IMG · 01</div>
-        <div class="frame">IMG · 02</div>
-        <div class="frame">IMG · 03</div>
-      </div>
-
-      <div class="progress"><span data-value="40%"></span></div>
-      <div class="progress-label"><span>Development progress</span><span>40%</span></div>
-    </div>
-  </section>
-
-  <section class="container reveal">
-    <span class="section-eyebrow">Future prototypes</span>
-    <h2 class="section-title">What comes after V0.</h2>
-    <div class="future-list">
-      <div class="item">
-        <span class="tag">V1</span>
-        <h5>Spaciotemporal Mapping</h5>
-        <p>Haze V1 builds on the existing V0 source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site along with added wind direction sensors. The outputs of these nodes with the measured wind direction and real-time measurements of pollutants using the existing V0 model will be used to create a real-time spatiotemporal air pollution map that reflects the pollutant concentrations and distributions across the area in real time. This dynamic representation will allow a more precise identification of likely pollution sources and estimation of their contributions by analyzing spatial concentration gradients, temporal variations and pollutant dispersion patterns.</p>
-      </div>
-    </div>
-  </section>
+<section class="pv v1" id="v1">
+  <div class="wrap">
+    <h2 class="rv wide">What comes after V0</h2>
+    <span class="tag">V1</span>
+    <h3 class="sub rv" style="margin-top:var(--s2)">Spatiotemporal Mapping</h3>
+    <p class="lede rv">Haze V1 builds on the existing V0 source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site, along with added wind direction sensors. The outputs of these nodes, with the measured wind direction and real-time measurements of pollutants using the existing V0 model, will be used to create a real-time spatiotemporal air pollution map that reflects the pollutant concentrations and distributions across the area in real time. This dynamic representation will allow a more precise identification of likely pollution sources and estimation of their contributions by analyzing spatial concentration gradients, temporal variations and pollutant dispersion patterns.</p>
+    <div class="feat" data-set="v1"></div>
+  </div>
+</section>
 </main>
 
+<!-- Interaction patterns adapted from Skiper UI (skiper76, skiper72) -->
 <footer class="footer">
   <div class="container footer-inner">
     <div>
@@ -100,16 +276,80 @@
       <p>Built in public · MIT License</p>
     </div>
     <div class="footer-links">
-      <a href="/journal.html">Journal</a>
-      <a href="/prototypes.html">Prototypes</a>
-      <a href="/roadmap.html">Roadmap</a>
-      <a href="/fellowship.html">Engineering Fellowship</a>
-      <a href="/about.html">About</a>
-      <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="journal.html">Journal</a>
+      <a href="prototypes.html">Prototypes</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="fellowship.html">Engineering Fellowship</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
+<script>
+const nav=document.getElementById('nav'),nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');
+nt.addEventListener('click',()=>{const o=nl.classList.toggle('open');nt.setAttribute('aria-expanded',o)});
+nl.addEventListener('click',e=>{if(e.target.closest('a')){nl.classList.remove('open');nt.setAttribute('aria-expanded','false')}});
+const sc=()=>nav.classList.toggle('scrolled',scrollY>8);addEventListener('scroll',sc,{passive:true});sc();
+
+const core=[
+ {t:"Microcontroller",n:"ESP32",img:"images/esp32.jpg",d:"The ESP32 is the node's brain. It polls every sensor, timestamps the readings and sends them over built-in Wi-Fi, so each node can stream data without extra communication hardware."},
+ {t:"Particulate sensor",n:"PMS5003",img:"images/pms5003.jpg",d:"The PMS5003 uses laser scattering to count particles and report PM1.0, PM2.5 and PM10 over UART. Its size-binned particle counts are the raw, indirect features the ML model learns from."},
+ {t:"Gas sensor",n:"MiCS-6814",img:"images/mics6814.jpg",d:"The MiCS-6814 carries three sensing elements that respond to reducing gases (such as CO), oxidising gases (such as NO2) and ammonia. Gas signatures help separate sources that produce similar particulate readings."},
+ {t:"Environment sensor",n:"BME280",img:"images/bme280.jpg",d:"The BME280 measures temperature, humidity and pressure. Humidity especially affects optical particle readings, so this data is needed to calibrate against reference-grade instruments."}
+];
+const data={
+ v0:core,
+ v1:core.concat([{t:"DIY Wind Vane",n:"Potentiometer + ADC",img:"images/windvane.jpg",d:"A rotating vane turns a potentiometer, producing a voltage that the ESP32 reads through an ADC pin. It is made with a low-friction shaft, vane and weather protection."}])
+};
+
+/* build feature blocks */
+document.querySelectorAll('.feat').forEach(el=>{
+  const items=data[el.dataset.set], id=el.dataset.set;
+  el.innerHTML=
+   '<div class="tabs">'+items.map((it,i)=>
+    '<div class="tab" data-on="'+(i==0)+'"><h3><button type="button" aria-expanded="'+(i==0)+'" aria-controls="'+id+'-b'+i+'" data-i="'+i+'"><span class="num">0'+(i+1)+'</span>'+it.t+'<span class="plus" aria-hidden="true"></span></button></h3>'+
+    '<div class="body" id="'+id+'-b'+i+'" role="region"><div><span class="part">'+it.n+'</span><p>'+it.d+'</p></div></div></div>').join('')+'</div>'+
+   '<div class="stage" aria-live="polite">'+items.map((it,i)=>
+    '<figure class="shot" style="margin:0" data-on="'+(i==0)+'"><div class="ph"><div><b>'+it.n+'</b>add image: '+it.img+'</div></div><img src="'+it.img+'" alt="'+it.n+' module" loading="lazy"></figure>').join('')+'</div>';
+  el.querySelectorAll('img').forEach(im=>{
+    const ok=()=>im.parentElement.classList.add('has');
+    im.addEventListener('load',ok); im.addEventListener('error',()=>im.remove());
+    if(im.complete&&im.naturalWidth)ok();
+  });
+  el.querySelector('.tabs').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b)return;
+    const i=+b.dataset.i;
+    el.querySelectorAll('.tab').forEach((t,k)=>{t.dataset.on=k==i;t.querySelector('button').setAttribute('aria-expanded',k==i)});
+    el.querySelectorAll('.shot').forEach((s,k)=>s.dataset.on=k==i);
+  });
+});
+
+/* horizontal word reveal tied to scroll */
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const rvs=[...document.querySelectorAll('.rv')];
+if(!rm){
+  rvs.forEach(el=>{
+    const words=el.textContent.trim().split(/(\s+)/);
+    el.setAttribute('aria-label',el.textContent.trim());
+    el.innerHTML=words.map(w=>/^\s+$/.test(w)?w:'<span class="w" aria-hidden="true">'+w+'</span>').join('');
+  });
+  const upd=()=>{
+    const vh=innerHeight;
+    rvs.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      const ws=el.querySelectorAll('.w'), n=ws.length;
+      const prog=Math.min(1,Math.max(0,(vh*.92-r.top)/(vh*.55)));
+      ws.forEach((w,i)=>{
+        const a=i/n, p=Math.min(1,Math.max(0,(prog-a*.8)/.2));
+        w.style.setProperty('--p',p.toFixed(3));
+      });
+    });
+  };
+  let t=false;
+  const tick=()=>{if(!t){t=true;requestAnimationFrame(()=>{upd();t=false})}};
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);upd();
+}
+</script>
 </body>
 </html>
