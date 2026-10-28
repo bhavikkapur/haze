@@ -251,18 +251,28 @@ h2.wide{max-width:none}
 <section class="pv v0" id="v0">
   <div class="wrap">
     <span class="tag">V0</span>
-    <h2 class="rv">Source attribution</h2>
-    <p class="lede rv">The prototype navigates source attribution through low cost sensor networks using reference grade sensor data and regression models to calibrate sensors, along with lab grade source labelled data that serve as ground truth for training ML models to analyse indirect features of particulate matter from the sensors and attribute them to relevant source labels.</p>
+    <h2 class="rv">Haze Core</h2>
+    <p class="lede rv">This model navigates source attribution through low cost sensor networks using reference grade sensor data and regression models to calibrate sensors, along with lab grade source labelled data that serve as ground truth for training ML models to analyse indirect features of particulate matter from the sensors and attribute them to relevant source labels.</p>
     <div class="feat" data-set="v0"></div>
   </div>
 </section>
 
+<section class="pv v2" id="v2">
+  <div class="wrap">
+    <span class="tag">Tier 1</span>
+    <h2 class="rv">Haze Duo</h2>
+    <p class="lede rv">HAZE Duo uses two solar powered cellular nodes installed at opposite boundaries of your site (upwind and downwind). It provides true net dust emissions from your site by continuously calculating the difference between background regional smog coming into the site and the air going out.</p>
+    <div class="feat" data-set="v2"></div>
+  </div>
+</section>
+</main>
+
+
 <section class="pv v1" id="v1">
   <div class="wrap">
-    <h2 class="rv wide">What comes after V0</h2>
-    <span class="tag">V1</span>
-    <h3 class="sub rv" style="margin-top:var(--s2)">Spatiotemporal Mapping</h3>
-    <p class="lede rv">Haze V1 builds on the existing V0 source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site, along with added wind direction sensors. The outputs of these nodes, with the measured wind direction and real-time measurements of pollutants using the existing V0 model, will be used to create a real-time spatiotemporal air pollution map that reflects the pollutant concentrations and distributions across the area in real time. This dynamic representation will allow a more precise identification of likely pollution sources and estimation of their contributions by analyzing spatial concentration gradients, temporal variations and pollutant dispersion patterns.</p>
+    <span class="tag">Tier 2</span>
+    <h2 class="rv">Grid Pro</h2>
+    <p class="lede rv">Grid Pro builds on the existing core source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site, along with added wind direction sensors. The outputs of these nodes, with the measured wind direction and real-time measurements of pollutants using the existing core model, will be used to create a real-time spatiotemporal air pollution map that reflects the pollutant concentrations and distributions across the area in real time. This dynamic representation will allow a more precise identification of likely pollution sources and estimation of their contributions by analyzing spatial concentration gradients, temporal variations and pollutant dispersion patterns.</p>
     <div class="feat" data-set="v1"></div>
   </div>
 </section>
@@ -300,10 +310,23 @@ const core=[
 ];
 const data={
  v0:core,
- v1:core.concat([
+ v1:[
+  {t:"Spatiotemporal Map",n:"Spatial-Temporal Map",img:"images/map.jpg",d:"A live map visualizing how pollution levels evolve across space and time, combining distributed sensor readings with wind data to track pollutant dispersion, identify hotspots, and improve source attribution."},
   {t:"DIY Wind Vane",n:"Potentiometer + ADC",img:"images/windvane.jpg",d:"A rotating vane turns a potentiometer, producing a voltage that the ESP32 reads through an ADC pin. It is made with a low-friction shaft, vane and weather protection."},
-  {t:"Spatiotemporal Map",n:"Spatial-Temporal Map",img:"images/map.jpg",d:"A live map visualizing how pollution levels evolve across space and time, combining distributed sensor readings with wind data to track pollutant dispersion, identify hotspots, and improve source attribution."}
- ])
+  {t:"Microcontroller",n:"ESP32",img:"images/esp32.jpg",d:"The ESP32 is the node's brain. It polls every sensor, timestamps the readings and sends them over built-in Wi-Fi, so each node can stream data without extra communication hardware."},
+  {t:"Particulate sensor",n:"PMS5003",img:"images/pms5003.jpg",d:"The PMS5003 uses laser scattering to count particles and report PM1.0, PM2.5 and PM10 over UART. Its size-binned particle counts are the raw, indirect features the ML model learns from."},
+  {t:"Gas sensor",n:"MiCS-6814",img:"images/mics6814.jpg",d:"The MiCS-6814 carries three sensing elements that respond to reducing gases (such as CO), oxidising gases (such as NO2) and ammonia. Gas signatures help separate sources that produce similar particulate readings."},
+  {t:"Environment sensor",n:"BME280",img:"images/bme280.jpg",d:"The BME280 measures temperature, humidity and pressure. Humidity especially affects optical particle readings, so this data is needed to calibrate against reference-grade instruments."}
+ ],
+ v2:[
+  {t:"Dual Sensors",n:"Dual Sensors",img:"images/dualsensors.jpg",d:"Two sensors are placed on opposite boundaries; one upwind and one downwind. Subtracting the PM levels of the incoming air from the outgoing air removes the city smog and isolates the dust emissions from the site."},
+  {t:"DIY Wind Vane",n:"Potentiometer + ADC",img:"images/windvane.jpg",d:"A rotating vane turns a potentiometer, producing a voltage that the ESP32 reads through an ADC pin. It is made with a low-friction shaft, vane and weather protection."},
+  {t:"Microcontroller",n:"ESP32",img:"images/esp32.jpg",d:"The ESP32 is the node's brain. It polls every sensor, timestamps the readings and sends them over built-in Wi-Fi, so each node can stream data without extra communication hardware."},
+  {t:"Particulate sensor",n:"PMS5003",img:"images/pms5003.jpg",d:"The PMS5003 uses laser scattering to count particles and report PM1.0, PM2.5 and PM10 over UART. Its size-binned particle counts are the raw, indirect features the ML model learns from."},
+  {t:"Gas sensor",n:"MiCS-6814",img:"images/mics6814.jpg",d:"The MiCS-6814 carries three sensing elements that respond to reducing gases (such as CO), oxidising gases (such as NO2) and ammonia. Gas signatures help separate sources that produce similar particulate readings."},
+  {t:"Environment sensor",n:"BME280",img:"images/bme280.jpg",d:"The BME280 measures temperature, humidity and pressure. Humidity especially affects optical particle readings, so this data is needed to calibrate against reference-grade instruments."}
+ ],
+  
 };
 
 /* build feature blocks */
