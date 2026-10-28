@@ -218,7 +218,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#023">
-        <div class="log-meta"><span class="num">023</span>Oct 1 2026 · update</div>
+        <div class="log-meta"><span class="num">023</span>Oct 1 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Multivariate regressions</h3>
           <p>Adding predictors to a regression model allows me to separate their effects. The coefficients will show me how much each contributes to the outcome, controlling for the other variables. If the predictors are not independent, which can happen if they are temperature and humidity, I will need to take it into account. A change in the sign of a coefficient may indicate that something is wrong with the model.</p>
@@ -226,7 +226,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#023">
-        <div class="log-meta"><span class="num">023</span>Oct 2 2026 · update</div>
+        <div class="log-meta"><span class="num">023</span>Oct 2 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>The op-amp abstraction</h3>
           <p>An op-amp with negative feedback has a very high gain, which allows a circuit to have a predictable response based on resistors. Because of the high gain, the two inputs are at approximately the same voltage, and no current flows into the op-amp. This allows me to ignore their value and focus on the resistor ratios. The same abstraction allows me to build amplifiers, filters and other circuits. The op-amp model is good at describing amplifiers at low frequencies, but not near the supply rails, or when dealing with the input bias currents or the offset voltage.</p>
@@ -234,7 +234,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#023">
-        <div class="log-meta"><span class="num">023</span>Oct 3 2026 · update</div>
+        <div class="log-meta"><span class="num">023</span>Oct 3 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Error propagation and uncertainty</h3>
           <p>Independent errors add up, but their contributions are squared and summed, not added directly. The individual terms dominate the sum, with the largest error determining the result. Every step I take adds uncertainty, including amplification or attenuation stages, calibration procedures and other steps. A calibrated measurement is not useful if I do not report an uncertainty.</p>
@@ -242,7 +242,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#024">
-        <div class="log-meta"><span class="num">024</span>Oct 4 2026 · update</div>
+        <div class="log-meta"><span class="num">024</span>Oct 4 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Op-amp circuits</h3>
           <p>The basic circuits are a buffer, an inverting amplifier with gain -Rf/Rin, a non-inverting amplifier with gain 1+Rf/Rg, and a summing amplifier. Buffers are needed if a sensor cannot drive the next stage directly due to a high output impedance, and amplifiers provide additional gain. PMS5003 and BME280 sensors are digital and do not need them, but a sensor with an analog output may need an amplifier to increase its gain or offset. I should review the datasheet for such a sensor before working with it.</p>
@@ -250,7 +250,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#025">
-        <div class="log-meta"><span class="num">025</span>Oct 8 2026 · update</div>
+        <div class="log-meta"><span class="num">025</span>Oct 8 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Experimental design and train/test discipline</h3>
           <p>Time-series data has temporal structure, and a random train/test split will lead to data leakage. A random split will have the test set be more similar to the training set, leading to overly optimistic results. To avoid this, time-series data should be split into contiguous blocks for training and testing. A colocated run should include a variety of conditions for the sensor, representing the range of humidity, temperature and PM values that it will encounter. The details of the run, including its duration and how the data will be split, must be determined ahead of time.</p>
@@ -258,7 +258,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#026">
-        <div class="log-meta"><span class="num">026</span>Oct 8 2026 · update</div>
+        <div class="log-meta"><span class="num">026</span>Oct 8 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Op-amps and positive feedback</h3>
           <p>Positive feedback causes the output of an op-amp to saturate, and can be useful for creating comparators with hysteresis. Positive feedback is also used to create Schmitt triggers, which improves noise immunity by having different thresholds for the rising and falling edges. For example, a comparator with a 9 kΩ feedback resistor and a 1 kΩ resistor to ground on ±5 V rails will switch at -0.5 V and +0.5 V, giving it 1 V of hysteresis. This is more useful for signals that are noisy around a threshold than for digital signals, which is why HAZE is not a high priority.</p>
@@ -266,7 +266,7 @@ While air quality monitoring websites did exist they did not attribute pollution
       </a>
 
       <a class="log-card reveal" href="#027">
-        <div class="log-meta"><span class="num">027</span>Oct 9 2026 · update</div>
+        <div class="log-meta"><span class="num">027</span>Oct 9 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Cross-validation</h3>
           <p>Cross-validation approximates the error of a model on unseen data by partitioning the data into segments and using each segment as a test set in turn. The cross-validated error can then be averaged across all segments. For time-series data, a cross-validation fold should be contiguous in time to avoid data leakage. By analogy with the train/test split, time-series data should be split using a block structure. In the next few lectures, I will analyze the effect of such a structure on the source attribution model.</p>
