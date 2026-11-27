@@ -1,512 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HAZE Educational Fellowship, making engineers where nobody was looking</title>
-<meta name="description" content="An engineering fellowship that pays underprivileged talent a stipend to learn, so no child has to choose between a day's earnings and a lifetime of possibility." />
-<meta name="theme-color" content="#0a0a0b" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<style>
-  /* HAZE — engineering notebook */
-  :root{
-    --bg:#0a0a0b;
-    --surface:#121214;
-    --ink:#f5f5f7;
-    --ink-2:#d8d8dc;
-    --muted:#8a8a92;
-    --muted-2:#5a5a62;
-    --line:#1e1e22;
-    --line-2:#2a2a30;
-    --accent:#4BA3FF;
-    --radius:18px;
-    --radius-sm:10px;
-    --radius-lg:28px;
-    --maxw:1120px;
-    --font-sans:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
-    --font-display:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
-    --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  }
-  html{color-scheme:dark}
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  html,body{
-    margin:0;padding:0;background:var(--bg);color:var(--ink);
-    font-family:var(--font-sans);font-size:16px;line-height:1.55;
-    font-feature-settings:"ss01","cv11";
-    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  ::selection{background:color-mix(in oklab,var(--accent) 25%,transparent);color:var(--ink)}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-  /* NAV */
-  .nav{position:sticky;top:0;z-index:50;
-    backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
-    background:color-mix(in oklab,var(--bg) 82%,transparent);
-    border-bottom:1px solid transparent;transition:border-color .3s ease,background .3s ease}
-  .nav.scrolled{border-bottom-color:var(--line)}
-  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative}
-  .brand{font-family:var(--font-display);font-weight:600;letter-spacing:.18em;font-size:14px}
-  .brand .dot{color:var(--accent)}
-  .nav-links{display:flex;gap:4px;align-items:center}
-  .nav-links a{padding:8px 14px;font-size:14px;color:var(--muted);border-radius:999px;transition:color .2s ease,background .2s ease}
-  .nav-links a:hover{color:var(--ink);background:var(--line)}
-  .nav-links a.active{color:var(--ink)}
-  .nav-links a.gh{color:var(--ink)}
-  .nav-toggle{display:none;background:none;border:0;font-size:20px;cursor:pointer;color:var(--ink)}
-  @media (max-width:780px){
-    .nav-toggle{display:block}
-    .nav-links{position:absolute;top:100%;right:20px;left:20px;background:var(--surface);border:1px solid var(--line);
-      border-radius:var(--radius);padding:10px;flex-direction:column;align-items:stretch;display:none;
-      box-shadow:0 20px 60px -30px rgba(0,0,0,.6)}
-    .nav-links.open{display:flex}
-    .nav-links a{padding:12px 14px}
-  }
-
-  /* SECTIONS */
-  section{padding:120px 0}
-  .section-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--muted-2);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px}
-  .section-eyebrow::before{content:"";width:6px;height:6px;border-radius:999px;background:var(--accent);display:inline-block}
-  .section-title{font-family:var(--font-display);font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-.02em;
-    font-weight:600;margin:0 0 20px;max-width:720px}
-  .section-title .accent{color:var(--accent)}
-  .section-lead{font-size:18px;color:var(--muted);max-width:640px;margin:0}
-
-  /* HERO */
-  .hero{padding:120px 0 120px;position:relative;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-  .hero-tag{display:inline-flex;align-items:center;gap:10px;padding:6px 12px 6px 8px;border:1px solid var(--line);
-    border-radius:999px;background:var(--surface);font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-bottom:32px}
-  .hero-tag .pulse{width:8px;height:8px;border-radius:999px;background:var(--accent);animation:pulse 2.2s ease-out infinite}
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--accent) 55%,transparent)}
-    70%{box-shadow:0 0 0 12px transparent}
-    100%{box-shadow:0 0 0 0 transparent}
-  }
-  .hero h1{font-family:var(--font-display);font-size:clamp(38px,5.6vw,68px);line-height:1.02;letter-spacing:-.035em;
-    font-weight:600;margin:0 0 20px}
-  .hero h1 .accent{color:var(--accent)}
-  .hero h1 .line{display:block;overflow:hidden}
-  .hero h1 .line > span{display:block;transform:translateY(105%);animation:rise 1s cubic-bezier(.16,1,.3,1) forwards}
-  @keyframes rise{to{transform:translateY(0)}}
-  .hero .translation{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted-2);margin:0 0 22px;
-    opacity:0;animation:fade .9s ease .8s forwards}
-  .hero p.lead{font-size:clamp(16px,1.4vw,18px);color:var(--muted);max-width:520px;margin:0 0 36px;line-height:1.55;
-    opacity:0;animation:fade .9s ease .95s forwards}
-  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fade .9s ease 1.1s forwards}
-  @keyframes fade{to{opacity:1}}
-  .hero-figure{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);
-    background:var(--surface);opacity:0;animation:fade 1.2s ease .5s forwards}
-  .hero-figure img{aspect-ratio:4/5;object-fit:cover;width:100%;filter:saturate(.85) contrast(1.05)}
-  .hero-figure::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(to top,color-mix(in oklab,var(--bg) 85%,transparent),transparent 55%)}
-  .figure-cap{position:absolute;left:20px;right:20px;bottom:18px;z-index:2;font-family:var(--font-mono);font-size:11px;
-    letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-  @media (max-width:900px){
-    .hero{padding:72px 0 80px}
-    .hero-grid{grid-template-columns:1fr;gap:36px}
-    .hero-figure img{aspect-ratio:16/10}
-  }
-
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-size:15px;font-weight:500;
-    border:1px solid transparent;cursor:pointer;font-family:inherit;
-    transition:transform .15s ease,background .2s ease,border-color .2s ease,color .2s ease;will-change:transform}
-  .btn:hover{transform:translateY(-1px)}
-  .btn-primary{background:var(--ink);color:var(--bg)}
-  .btn-primary:hover{background:var(--ink-2)}
-  .btn-secondary{background:transparent;color:var(--ink);border-color:var(--line-2)}
-  .btn-secondary:hover{border-color:var(--ink)}
-  .btn .arrow{transition:transform .2s ease}
-  .btn:hover .arrow{transform:translateX(3px)}
-  .btn-sm{padding:9px 16px;font-size:14px}
-
-  /* marquee of the sentence he has heard a hundred times */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);overflow:hidden;padding:14px 0}
-  .track{display:flex;gap:40px;width:max-content;animation:slide 36s linear infinite}
-  .marquee:hover .track{animation-play-state:paused}
-  @keyframes slide{to{transform:translateX(-50%)}}
-  .track span{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);
-    white-space:nowrap;display:inline-flex;align-items:center;gap:40px}
-  .track span::after{content:"";width:5px;height:5px;border-radius:999px;background:var(--accent);opacity:.8}
-
-  /* two column story */
-  .two-col{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
-  .two-col p{font-size:18px;color:var(--ink-2);line-height:1.65;margin:0 0 20px}
-  .two-col p:last-child{color:var(--muted)}
-  .two-col p strong{color:var(--ink);font-weight:600}
-  @media (max-width:780px){.two-col{grid-template-columns:1fr;gap:32px}}
-
-  .pull{font-family:var(--font-display);font-size:clamp(20px,2.4vw,28px);line-height:1.35;letter-spacing:-.02em;color:var(--ink);
-    border-left:2px solid var(--accent);padding:4px 0 4px 24px;margin:0 0 28px}
-  .pull small{display:block;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--muted-2);margin-top:14px;line-height:1.6}
-
-  .media{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);position:relative}
-  .media img{width:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
-  .media-16 img{aspect-ratio:16/9}
-  .media-43 img{aspect-ratio:4/3}
-  .media-wide img{aspect-ratio:21/9}
-  .media figcaption{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);
-    padding:14px 18px;border-top:1px solid var(--line)}
-
-  /* NOW card — the arithmetic (logos) */
-  .now-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px;
-    display:grid;grid-template-columns:repeat(2,1fr);gap:36px 60px;position:relative;overflow:hidden;margin-top:40px}
-  .now-card::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(600px 200px at 90% 0%,color-mix(in oklab,var(--accent) 8%,transparent),transparent 60%)}
-  .now-header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);
-    padding-bottom:24px;margin-bottom:4px;font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--muted);gap:16px}
-  .now-live{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
-  .now-live .pulse{width:8px;height:8px;border-radius:999px;background:var(--accent);animation:pulse 2.2s ease-out infinite}
-  .now-item .label{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2);margin-bottom:10px}
-  .now-item .value{font-family:var(--font-display);font-size:22px;letter-spacing:-.01em;color:var(--ink);font-weight:500}
-  .now-item .value.accent{color:var(--accent)}
-  .now-item .note{color:var(--muted);font-size:14px;margin:8px 0 0}
-  .now-footer{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;
-    gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:12px;color:var(--muted)}
-  @media (max-width:640px){.now-card{padding:28px;grid-template-columns:1fr;gap:24px}}
-
-  /* future list — kairos */
-  .future-list{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .future-list .item{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--surface);
-    transition:border-color .2s ease,transform .2s ease}
-  .future-list .item:hover{border-color:var(--line-2);transform:translateY(-2px)}
-  .future-list .item h5{margin:0 0 6px;font-family:var(--font-display);font-size:18px;letter-spacing:-.01em;font-weight:500}
-  .future-list .item p{margin:0;color:var(--muted);font-size:14px}
-  .future-list .item .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--accent);display:block;margin-bottom:12px}
-  @media (max-width:780px){.future-list{grid-template-columns:1fr}}
-
-  /* timeline — the fellowship, a real sequence */
-  .timeline{position:relative;margin-top:8px;padding-left:28px}
-  .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--line-2)}
-  .tl-item{position:relative;padding:14px 0 14px 24px}
-  .tl-item::before{content:"";position:absolute;left:-28px;top:26px;width:15px;height:15px;border-radius:999px;
-    background:var(--bg);border:1px solid var(--line-2)}
-  .tl-item.done::before{background:var(--ink);border-color:var(--ink)}
-  .tl-item.current::before{background:var(--accent);border-color:var(--accent);
-    box-shadow:0 0 0 5px color-mix(in oklab,var(--accent) 22%,transparent)}
-  .tl-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .tl-label{font-family:var(--font-display);font-size:18px;color:var(--ink);font-weight:500;letter-spacing:-.01em}
-  .tl-status{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
-  .tl-item.done .tl-status{color:var(--ink)}
-  .tl-item.current .tl-status{color:var(--accent)}
-  .tl-item p{margin:8px 0 0;color:var(--muted);font-size:15px;max-width:60ch}
-  .timeline-columns{display:grid;grid-template-columns:200px 1fr;gap:60px;margin-top:40px;align-items:start}
-  .timeline-columns h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--muted-2);margin:0}
-  @media (max-width:780px){.timeline-columns{grid-template-columns:1fr;gap:20px}}
-
-  /* proto card — who is building this (ethos) */
-  .proto-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:48px;margin-top:40px}
-  .proto-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding-bottom:28px;
-    border-bottom:1px solid var(--line);margin-bottom:28px;flex-wrap:wrap}
-  .proto-title{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);letter-spacing:-.03em;margin:0 0 6px;font-weight:500}
-  .proto-subtitle{color:var(--muted);margin:0;font-size:16px;max-width:52ch}
-  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
-    background:color-mix(in oklab,var(--accent) 12%,transparent);color:var(--accent);font-family:var(--font-mono);
-    font-size:11px;letter-spacing:.18em;text-transform:uppercase}
-  .badge .pulse{width:6px;height:6px;border-radius:999px;background:var(--accent)}
-  .proto-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
-  .proto-block h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--muted-2);margin:0 0 12px}
-  .proto-block ul{list-style:none;padding:0;margin:0}
-  .proto-block li{padding:10px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;font-size:15px}
-  .proto-block li:last-child{border-bottom:0}
-  .proto-block li span{color:var(--muted);font-family:var(--font-mono);font-size:13px;white-space:nowrap}
-  .signature{font-family:var(--font-display);font-size:18px;font-weight:500;margin:28px 0 0}
-  .signature small{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--muted-2);margin-top:8px}
-  @media (max-width:780px){.proto-grid{grid-template-columns:1fr}.proto-card{padding:28px}}
-
-  /* gallery */
-  .gallery{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .gallery figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);
-    transition:border-color .2s ease,transform .2s ease}
-  .gallery figure:hover{border-color:var(--line-2);transform:translateY(-2px)}
-  .gallery img{aspect-ratio:4/3;object-fit:cover;width:100%;filter:saturate(.85) contrast(1.05)}
-  .gallery figcaption{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--muted-2);padding:14px 16px;border-top:1px solid var(--line)}
-  @media (max-width:780px){.gallery{grid-template-columns:1fr 1fr}}
-
-  /* progress */
-  .progress{margin-top:28px;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
-  .progress > span{display:block;height:100%;background:var(--accent);width:0;border-radius:999px;
-    transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
-  .progress-label{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--muted-2);margin-top:10px}
-
-  /* outcome log cards */
-  .journal-list{display:flex;flex-direction:column;gap:20px;margin-top:40px}
-  .log-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:40px;
-    display:grid;grid-template-columns:200px 1fr auto;gap:40px;align-items:center;
-    transition:border-color .2s ease,transform .2s ease}
-  .log-card:hover{border-color:var(--line-2);transform:translateY(-2px)}
-  .log-meta{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
-  .log-meta .num{font-size:32px;color:var(--ink);letter-spacing:-.02em;display:block;margin-bottom:6px}
-  .log-body h3{font-family:var(--font-display);font-size:24px;letter-spacing:-.02em;margin:0 0 10px;font-weight:500}
-  .log-body p{color:var(--muted);margin:0;font-size:16px;max-width:60ch}
-  .log-cta{color:var(--accent);font-size:14px;white-space:nowrap}
-  @media (max-width:780px){.log-card{grid-template-columns:1fr;gap:20px;padding:28px}}
-
-  /* CTA */
-  .cta-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:8px}
-  .paths{display:flex;flex-direction:column;gap:14px}
-  .path{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;border-radius:var(--radius);
-    background:var(--surface);border:1px solid var(--line);transition:border-color .2s ease,transform .2s ease}
-  .path:hover{border-color:var(--accent);transform:translateX(4px)}
-  .path b{display:block;font-weight:600;font-size:16px}
-  .path span.desc{display:block;color:var(--muted);font-size:14px;margin-top:5px}
-  .path .arrow{color:var(--accent);font-size:18px;flex:none}
-  @media (max-width:780px){.cta-wrap{grid-template-columns:1fr;gap:36px}}
-
-  /* FOOTER */
-  .footer{border-top:1px solid var(--line);padding:60px 0 50px;margin-top:60px}
-  .footer-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-  .footer .brand{font-size:20px;letter-spacing:.2em}
-  .footer p{color:var(--muted);margin:8px 0 0;font-size:14px}
-  .footer-links{display:flex;gap:22px;font-family:var(--font-mono);font-size:12px;color:var(--muted);
-    letter-spacing:.14em;text-transform:uppercase}
-  .footer-links a:hover{color:var(--ink)}
-
-  /* Reveal animation */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);
-    transition-delay:var(--d,0ms)}
-  .reveal.in{opacity:1;transform:none}
-
-  @media (max-width:780px){section{padding:80px 0}}
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none !important;transition:none !important}
-    .reveal{opacity:1;transform:none}
-    .hero h1 .line > span{transform:none}
-    .hero .translation,.hero p.lead,.hero-actions,.hero-figure{opacity:1}
-  }
-</style>
+<!DOCTYPE html><html lang="en" data-qb-installed="true"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAZE Educational Fellowship — Making engineers where nobody was looking</title>
+<meta name="description" content="An engineering fellowship that pays underprivileged talent a stipend to learn, so no child has to choose between a day&#39;s earnings and a lifetime of possibility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-<a href="#story" class="sr-only">Skip to content</a>
+<body class="page-fellowship">
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top">HAZE<span class="dot">.</span></a>
+    <a class="brand" href="/home.html">HAZE<span class="dot">.</span></a>
     <nav class="nav-links" id="navLinks" aria-label="Sections">
       <a href="/home.html">Home</a>
       <a href="/journal.html">Journal</a>
       <a href="/prototypes.html">Products</a>
       <a href="/roadmap.html">Roadmap</a>
-      <a href="/fellowship.html">Engineering Fellowship</a>
+      <a href="/fellowship.html" class="active">Engineering Fellowship</a>
       <a href="/about.html">About</a>
-      <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="https://github.com/bhavikkapur/haze" class="gh" target="_blank" rel="noreferrer">GitHub ↗</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">≡</button>
   </div>
 </header>
 
 <main id="top">
-  <!-- ================= HERO · PATHOS ================= -->
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero">
     <div class="container hero-grid">
       <div>
-        <div class="hero-tag"><span class="pulse" aria-hidden="true"></span> COHORT 001 &middot; OPEN FOR FELLOWS</div>
         <h1 id="hero-title">
-          <span class="line"><span style="animation-delay:.2s">&ldquo;I want to</span></span>
-          <span class="line"><span style="animation-delay:.32s">teach underprivileged.</span></span>
-          <span class="line"><span class="accent" style="animation-delay:.44s">students how</span></span>
-          <span class="line"><span class="accent" style="animation-delay:.56s">to fail.&rdquo;</span></span>
+          <span class="line"><span>“I want to teach</span></span>
+          <span class="line"><span>underprivileged</span></span>
+          <span class="line"><span>students <span class="accent">how to</span></span></span>
+          <span class="line"><span class="accent">fail.”</span></span>
         </h1>
-        <p class="lead">Not because i want them to be failiures, but because i want them to learn what failiure has to offer</p>
+        <p class="lead">Not because I want them to be failures, but because I want them to learn what failure has to offer.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#apply">Fund a fellow <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-primary" href="#apply">Fund a fellow →</a>
           <a class="btn btn-secondary" href="#program">See how it works</a>
         </div>
       </div>
       <div class="hero-figure">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzA5Xoz71ES4Wh5P5M1metgQcn26ReL3S4xDdsCvgqoofH8Vii13O6Fiik&s=10" alt="Fellow at the bench" width="400" height="500" />
+        <img src="images/fellowship1.jpg" alt="Street children in India" width="400" height="500">
       </div>
     </div>
   </section>
 
- <!-- ================= WHO · ETHOS ================= -->
-  <section id="who" aria-labelledby="who-t">
+  <section id="who">
     <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">From the founders desk</div>
-        <h2 class="section-title" id="who-t">I started with no experience. That is exactly the point.</h2>
+      
+      <h2 class="section-title reveal">I started with no experience. That is exactly the point.</h2>
+      <div class="news-dateline reveal" style="--d:60ms">
+        <span>Founder&#39;s Note · HAZE Educational Fellowship</span>
+        
       </div>
-      <div class="proto-card reveal" style="--d:100ms">
-        <div class="proto-head">
-          <div>
-            <h3 class="proto-title">Built by a practitioner that started with no prior experience and a willingness to try</h3>
-            <p>I started learning electronics from scratch with motivation to solve the problems existing around me. Haze itself was built around the purpose of creating air pollution accountability, electronics was the medium. I wanted to provide these children living in marganlised communties the oppurtunity to innovate that ceases to exist for them, and teach them one core principal worth learning that i learned along the way - the willingness to try.</p>
-          </div>
-          <span class="badge"><span class="pulse" aria-hidden="true"></span> Founder</span>
+      <div class="news-columns-2 reveal" style="--d:100ms">
+        <div class="news-col">
+          <h3>Built from Scratch</h3>
+          <p>I started learning electronics from scratch with motivation to solve the problems existing around me. Haze itself was built around the purpose of creating air pollution accountability; electronics was the medium. I wanted to provide children living in marginalized communities the opportunity to innovate that ceases to exist for them, and teach them one core principle worth learning — the willingness to try.</p>
         </div>
-        <div class="proto-grid">
-          <div class="proto-block">
-            <h4>What I believe</h4>
-            <p style="margin:0;color:var(--ink-2);font-size:17px;line-height:1.65">Starting is the key to solving any problem. HAZE is not charity, but the same ladder I climbed, put back down for someone willing to start from the first rung.</p>
-            <p class="signature">&mdash; Founder, HAZE Educational Fellowship
-              <small>Engineer &middot; Electronics practitioner &middot; Mentor</small>
-            </p>
-          </div>
+        <div class="news-col">
+          <h3>What I Believe</h3>
+          <p>Starting is the key to solving any problem. HAZE is not charity, but the same ladder I climbed, put back down for someone willing to start from the first rung.</p>
+          <p class="signature">— Founder, HAZE Educational Fellowship
+            <small>Engineer · Electronics practitioner · Mentor</small>
+          </p>
         </div>
-        <div class="progress-label"><span>Cohort 001 seats funded</span><span>22%</span></div>
       </div>
       <div class="gallery">
         <figure class="reveal" style="--d:60ms">
-          <img src="https://images.pexels.com/photos/9242901/pexels-photo-9242901.jpeg">
+          <img src="images/fellowship2.jpg" alt="Student working on electronics">
         </figure>
         <figure class="reveal" style="--d:160ms">
-          <img src="https://images.pexels.com/photos/7868829/pexels-photo-7868829.jpeg">
+          <img src="images/fellowship3.jpg" alt="Student presenting their project">
         </figure>
         <figure class="reveal" style="--d:260ms">
-          <img src="https://images.pexels.com/photos/15470542/pexels-photo-15470542.jpeg">
-        </figure>
+          <img src="images/fellowship4.jpg" alt="Student prototyping hardware">
       </div>
     </div>
-  </section> 
+  </section>
 
-  <!-- ================= STORY · PATHOS ================= -->
-  <section id="story" aria-labelledby="story-t">
+  <section id="story">
     <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">From traditional education to innovation</div>
-        <h2 class="section-title" id="story-t">The Gap.</h2>
-      </div>
-      <div class="two-col" style="margin-top:40px">
+      <div class="two-col">
         <div class="reveal" style="--d:80ms">
-          <figure class="media media-43" style="margin:0">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjjPwyx_rOHXqtxjFQ9xXTOAp93zCgLiGF4_NvVlFwuXmakBYftsbaqQPL&s=10"/>
+          <h2 class="section-title">The Gap.</h2>
+          <figure class="media media-43 mt-24">
+            <img src="images/fellowship5.jpg">
           </figure>
         </div>
-        <div class="reveal" style="--d:200ms">
-          <p> I was fortunate enough to have the freedom to try, fail, and try again, however millions of students from underprivileged backgrounds don't get the same resources and oppurtunities. While traditional governement schools provide free education, the children belonging to underprivileged communities face a gap in practical learning. They may have the intelligence, ambition, and potential to become engineers, entrepreneurs, or innovators, but the resources that could help them discover that potential are often far beyond what their families can afford. <strong>That is the gap i want to fill</strong></p>
+        <div class="col-body reveal" style="--d:200ms">
+          <p>I was fortunate enough to have the freedom to try, fail, and try again, however millions of students from underprivileged backgrounds don&#39;t get the same resources and opportunities. While traditional government schools provide free education, children belonging to underprivileged communities face a gap in practical learning.</p>
+          <p>They may have the intelligence, ambition, and potential to become engineers, entrepreneurs, or innovators, but the resources that could help them discover that potential are often far beyond what their families can afford. That is the gap I want to fill.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= ARITHMETIC · LOGOS ================= -->
-  <section id="math" aria-labelledby="math-t">
+  <section id="math">
     <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">Haze</div>
-        <h2 class="section-title" id="math-t">Where traditional school isnt <span class="accent">enough.</span></h2>
-        <p class="section-lead">Every child is born with the curiosity to learn, but traditional schooling often fails to nurture that curiosity effectively.</p>
+      
+      <h2 class="section-title reveal">Haze where traditional school isn&#39;t <span class="accent">enough.</span></h2>
+      <p class="section-lead reveal" style="--d:60ms">Every child is born with the curiosity to learn, but traditional schooling often fails to nurture that curiosity effectively.</p>
+      <div class="news-dateline reveal" style="--d:80ms">
+        
       </div>
-      <div class="now-card reveal" style="--d:100ms">
-        <div class="now-header">
-          <span class="now-live"><span class="pulse" aria-hidden="true"></span>The problem</span>
+      <div class="news-columns-2 reveal" style="--d:100ms">
+        <div class="news-col">
+          <span class="kicker">A traditional classroom</span>
+          <h3>A diploma handed over</h3>
+          <p>Students learn to memorize information, but never get the chance to innovate, learn from mistakes, or keep curiosity alive. Students are taught what exists, rather than given opportunities to question, build, experiment, and discover what they can create themselves.</p>
         </div>
-        <div class="now-item">
-          <div class="label">A traditional classroom</div>
-          <div class="value">A diploma handed over</div>
-          <p class="note">The students learns to memorize information, but never gets the chance to innovate, to learn from their mistakes, or to keep that curiosity alive. Students are taught what exists, but often have fewer opportunities to question, build, experiment, and discover what they can create themselves.</p>
-        </div>
-        <div class="now-item">
-          <div class="label">What HAZE changes</div>
-          <div class="value accent">A student that can create not just memorise</div>
-          <p class="note"> Students identify their own problems, develop idea, build prototypes, fail, try again and learn to solve their own problems. This could be a problem in their village with electricity, water, waste or anything else. With access to tools and mentorship, they aren't just learning technology, they're learning to think independently , build opportunities for themselves and leaving not only job-ready, but with a certificate and mentors that can vouch for their skills abilities and innovative mindset</p>
-        </div>
-        <div class="now-item">
-          <div class="label">What that buys</div>
-          <div class="value">An innovator, not another number</div>
-          <p class="note">built from hands-on labs, a mentor, and  the student leaves with a finished build and an innovative mindset.</p>
+        <div class="news-col">
+          <span class="kicker">What HAZE changes</span>
+          <h3 class="accent">A student who can create, not just memorize</h3>
+          <p>Students identify their own problems, develop ideas, build prototypes, fail, try again, and learn to solve real problems in their own communities—water, electricity, waste, or air. With access to tools and mentorship, they leave job-ready with a certificate and mentors who vouch for their skills.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= WHY NOW · KAIROS ================= -->
-  <section id="now" aria-labelledby="now-t">
+  <section id="now">
     <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">Why NOW</div>
-        <h2 class="section-title" id="now-t">The window closes quietly and early.</h2>
+      
+      <h2 class="section-title reveal">The window closes quietly and early.</h2>
+      <div class="news-dateline reveal" style="--d:60ms">
+        
       </div>
-      <div class="future-list">
-        <div class="item reveal" style="--d:60ms">
-          <span class="tag">Right now</span>
-          <h5>They are still curious</h5>
-          <p>Ask them how a motor works and they still lean in, however that instinct has a shelf life, and it is shorter than you'd like to believe.</p>
+      <div class="news-columns-2">
+        <div class="news-col reveal" style="--d:60ms">
+          <span class="kicker">Right now</span>
+          <h3>They are still curious</h3>
+          <p>Ask them how a motor works and they still lean in, however that instinct has a shelf life, and it is shorter than you&#39;d like to believe.</p>
         </div>
-        <div class="item reveal" style="--d:170ms">
-          <span class="tag">In two years</span>
-          <h5>They stop asking questions</h5>
-          <p>Two years from now, the curiosity may not still be there. Without the opportunity to explore it, it can become easier to accept the world as it is than to imagine what they could change</p>
+        <div class="news-col reveal" style="--d:170ms">
+          <span class="kicker">In two years</span>
+          <h3>They stop asking questions</h3>
+          <p>Two years from now, the curiosity may not still be there. Without the opportunity to explore it, it becomes easier to accept the world as it is than to imagine what they could change.</p>
         </div>
       </div>
-      <figure class="media media-wide reveal" style="--d:360ms;margin:24px 0 0">
-        <img src="https://imgs.search.brave.com/TWEY8RkYLOsyuw0kl-xP6kbsPXFBjk7KZoxnopHcbZE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI1/MTMzMzgyMy9waG90/by9wb29yLWluZGlh/bi1naXJsLWFza2lu/Zy1mb3ItaGVscC5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/S0wzVG92R3d5WF81/UjM5cVMzelEydWlZ/S0dyanF0ejNQVW9G/ZkRfdThjTT0">
-      </figure>
+      <figure class="media media-wide reveal mt-36" style="--d:360ms">
+        <img class="focus-45" src="images/fellowship6.jpg">
     </div>
   </section>
 
-  <!-- ================= FELLOWSHIP · LOGOS ================= -->
-  <section id="program" aria-labelledby="prog-t">
+  <section id="program">
     <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">The fellowship</div>
-      </div>
+      
       <div class="timeline-columns">
-        <h4 class="reveal">Stage sequence</h4>
+        <div class="reveal">
+          <h2 class="section-title m-0">Stage sequence.</h2>
+          <p class="note-small">Each cohort progresses through six structured stages—starting with foundational literacy, numeracy, and critical thinking, moving onto hands-on circuits and engineering fundamentals, and culminating in building a real solution for their own community.</p>
+        </div>
         <div class="timeline">
           <div class="tl-item done reveal" style="--d:40ms">
-            <div class="tl-head"><span class="tl-label">01 &middot; The Foundation</span><span class="tl-status">Basic literacy and numeracy</span></div>
-            <p>A fellow learns how to learn through basic literacy and numeracy, digital literacy, and learning how to communicate properly.</p>
+            <div class="tl-head"><span class="tl-label">01 · The Foundation</span></div>
+            <p>A fellow learns how to learn through basic literacy and numeracy, digital literacy, and communicating clearly.</p>
           </div>
           <div class="tl-item done reveal" style="--d:40ms">
-            <div class="tl-head"><span class="tl-label">02 &middot; Thinking</span><span class="tl-status">Logic and critical thinking</span></div>
-            <p>Problem decomposition, observation and expirmentation. Logic and critical thinking skills are embarked among students along with creativity and curiosity</p>
+            <div class="tl-head"><span class="tl-label">02 · Thinking</span></div>
+            <p>Problem decomposition, observation, and experimentation—building logic, critical thinking, creativity, and curiosity.</p>
           </div>
           <div class="tl-item done reveal" style="--d:120ms">
-            <div class="tl-head"><span class="tl-label">03 &middot; Hands on the hardware</span><span class="tl-status">The building basics</span></div>
-            <p>Breadboards, sensors, motors, and microcontrollers. A fellow learns about electricity and how to build simple circuits through hands on projects, because curiosity survives contact with real components, not chapters.</p>
+            <div class="tl-head"><span class="tl-label">03 · Hands on the hardware</span></div>
+            <p>Breadboards, sensors, motors, and microcontrollers. Fellows learn electricity and simple circuits through hands-on projects.</p>
           </div>
           <div class="tl-item done reveal" style="--d:120ms">
-            <div class="tl-head"><span class="tl-label">04 &middot; Engineering</span><span class="tl-status">The deep dive</span></div>
-            <p>Through electronics, programming, prototyping, measurement, testing, and debugging students deep dive into engineering concepts while learning to work like innovators.</p>
+            <div class="tl-head"><span class="tl-label">04 · Engineering</span></div>
+            <p>Through electronics, programming, prototyping, measurement, testing, and debugging, students deep-dive into engineering concepts.</p>
           </div>
           <div class="tl-item done reveal" style="--d:200ms">
-            <div class="tl-head"><span class="tl-label">05 &middot; An innovative solution to their own problem</span><span class="tl-status">Learn by doing</span></div>
-            <p>Each fellow picks a problem from their own street: water, light, safety, waste, and engineers a working answer to it. Education stops being abstract the moment it fixes something they can point at.</p>
+            <div class="tl-head"><span class="tl-label">05 · Solving their own problem</span></div>
+            <p>Each fellow picks a problem from their own street—water, light, safety, waste—and engineers a working answer to it.</p>
           </div>
           <div class="tl-item done reveal" style="--d:280ms">
-            <div class="tl-head"><span class="tl-label">06 &middot; Job ready, and more</span><span class="tl-status">Outcome</span></div>
-            <p>They finish with a portfolio, a demonstrable skill set, and mentors who vouch for them, ready for work, and equipped to invent past it. Along with that selective students are picked to continue learning in haze either through hands on projects or by mentoring the next batch of students with conitnued learning stipends</p>
+            <div class="tl-head"><span class="tl-label">06 · Job ready, and more</span></div>
+            <p>They finish with a portfolio, demonstrable skills, and mentors who vouch for them—with selective fellows continuing through paid hands-on projects or mentoring the next batch.</p>
           </div>
         </div>
       </div>
-      <figure class="media media-16 reveal" style="--d:340ms;margin:48px 0 0">
-        <img src="https://imgs.search.brave.com/VcehkJHfxJiGPHyvRNgSvXBWxkItlm8S4s0y5tk7LnY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNjI3/MDY3Mzk4L3Bob3Rv/L2hhcHB5LWluZGlh/bi15b3VuZy1naXJs/cy11c2luZy1kaWdp/dGFsLXRhYmxldC1k/ZXNlcnQtdmlsbGFn/ZS1pbmRpYS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9c2tO/SUt5S0J3QjF2T0p3/TzNBSmktT2dUUjBC/UkliaGpCNUNVQm54/YXdydz0">
+      <figure class="media media-16 reveal mt-48" style="--d:340ms">
+        <img class="focus-30" src="images/fellowship7.jpg">
       </figure>
     </div>  
   </section>
-  <!-- ================= CTA ================= -->
-  <section id="apply" aria-labelledby="cta-t" style="padding-top:0">
+
+  <section id="apply">
     <div class="container cta-wrap">
       <div class="reveal">
-        <div class="section-eyebrow">Take the first step with us</div>
-        <h2 class="section-title" id="cta-t">Starting is the key. <span class="accent">So start here.</span></h2>
-        <p class="section-lead">One funded fellow is one child who no longer has to choose between dinner and a future. That is a solvable problem, and solving it begins today.</p>
+        
+        <h2 class="section-title">Starting is the key. <span class="accent">So start here.</span></h2>
+        <p class="section-lead mb-0">One funded fellow is one child who no longer has to choose between dinner and a future. That is a solvable problem, and solving it begins today.</p>
       </div>
       <div class="paths reveal" style="--d:140ms">
         <a class="path" href="mailto:contact.haze29@gmail.com?subject=Funding%20a%20fellow">
-          <span><b>Fund a fellow</b><span class="desc">Cover one stipend and one lab kit. You are paying for the hours hunger would have taken.</span></span>
-          <span class="arrow" aria-hidden="true">&rarr;</span>
+          <span>Fund a fellow<span class="desc">Cover one stipend and one lab kit. You are paying for the hours hunger would have taken.</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
         </a>
         <a class="path" href="mailto:contact.haze29@gmail.com?subject=Mentoring%20with%20HAZE">
-          <span><b>Mentor on a bench</b><span class="desc">Engineers: give a few hours a month to reviews, debugging and encouragement.</span></span>
-          <span class="arrow" aria-hidden="true">&rarr;</span>
+          <span>Mentor on a bench<span class="desc">Engineers: give a few hours a month to reviews, debugging and encouragement.</span></span>
+          <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </div>
@@ -517,12 +212,14 @@
   <div class="container footer-inner">
     <div>
       <div class="brand">HAZE<span class="dot">.</span></div>
-      <p>Educational Fellowship &mdash; engineering, handed to the people who need it most.</p>
+      <p>Educational Fellowship — engineering, handed to the people who need it most.</p>
     </div>
     <div class="footer-links">
-      <a href="#story">The Street</a>
-      <a href="#program">Fellowship</a>
-      <a href="#apply">Apply</a>
+      <a href="/journal.html">Journal</a>
+      <a href="/prototypes.html">Prototypes</a>
+      <a href="/roadmap.html">Roadmap</a>
+      <a href="/about.html">About</a>
+      <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
     </div>
   </div>
 </footer>
@@ -531,7 +228,6 @@
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* nav border on scroll */
   var nav = document.querySelector('.nav');
   function onScroll() {
     if (nav) nav.classList.toggle('scrolled', (window.scrollY || 0) > 8);
@@ -539,7 +235,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* mobile nav */
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
   if (toggle && links) {
@@ -547,17 +242,11 @@
       var open = links.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
     });
-    links.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        links.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
   }
 
   /* scroll reveals */
   var items = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduce) {
+  if ('IntersectionObserver' in window && !reduce && !navigator.webdriver) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -567,40 +256,7 @@
   } else {
     items.forEach(function (el) { el.classList.add('in'); });
   }
-
-  /* progress bar fills when seen */
-  var bar = document.querySelector('.progress > span');
-  if (bar) {
-    var target = bar.getAttribute('data-width') || '0%';
-    if (reduce || !('IntersectionObserver' in window)) {
-      bar.style.width = target;
-    } else {
-      var pio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { bar.style.width = target; pio.unobserve(e.target); }
-        });
-      }, { threshold: 0.4 });
-      pio.observe(bar);
-    }
-  }
-
-  /* active nav link */
-  var sections = ['top', 'story', 'math', 'now', 'program', 'apply'];
-  if ('IntersectionObserver' in window) {
-    var sio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        document.querySelectorAll('.nav-links a').forEach(function (a) {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) sio.observe(el);
-    });
-  }
 })();
 </script>
-</body>
-</html>
+
+</body></html>

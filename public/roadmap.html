@@ -1,21 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roadmap — HAZE engineering plan</title>
-<meta name="description" content="The HAZE engineering roadmap: what is completed, what is in progress, and what is planned." />
-<meta property="og:title" content="HAZE Roadmap" />
-<meta property="og:description" content="Completed, in progress, and planned — the honest state of the project." />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
+<meta name="description" content="The HAZE engineering roadmap: what is completed, what is in progress, and what is planned.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-roadmap">
 <header class="nav">
   <div class="nav-inner">
     <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
@@ -24,7 +17,7 @@
       <a href="/home.html">Home</a>
       <a href="/journal.html">Journal</a>
       <a href="/prototypes.html">Products</a>
-      <a href="/roadmap.html">Roadmap</a>
+      <a href="/roadmap.html" class="active">Roadmap</a>
       <a href="/fellowship.html">Engineering Fellowship</a>
       <a href="/about.html">About</a>
       <a class="gh" href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -33,13 +26,12 @@
 </header>
 
 <main>
-  <section class="container" style="padding-top:140px; padding-bottom:60px">
-    <span class="section-eyebrow">Roadmap</span>
-    <h1 class="section-title" style="font-size:clamp(36px,5vw,60px)">The plan as it is.</h1>
-  
+  <section class="container page-head">
+    
+    <h1 class="section-title">The plan as it is.</h1>
 
     <div class="roadmap">
-      <div class="roadmap-group reveal">
+      <div class="roadmap-group">
         <h3>Completed <span class="count">04</span></h3>
         <div class="timeline">
           <div class="tl-item done"><span class="tl-label">Project Idea</span><span class="tl-status">Done</span></div>
@@ -49,23 +41,22 @@
         </div>
       </div>
 
-      <div class="roadmap-group reveal">
+      <div class="roadmap-group">
         <h3>In Progress <span class="count">03</span></h3>
         <div class="timeline">
           <div class="tl-item current"><span class="tl-label">Learning Electronics</span><span class="tl-status">Active</span></div>
           <div class="tl-item current"><span class="tl-label">Calibration</span><span class="tl-status">Active</span></div>
           <div class="tl-item current"><span class="tl-label">Professor Outreach</span><span class="tl-status">Active</span></div>
         </div>
-        </div>
       </div>
 
-      <div class="roadmap-group reveal">
+      <div class="roadmap-group">
         <h3>Planned <span class="count">04</span></h3>
         <div class="timeline">
           <div class="tl-item upcoming"><span class="tl-label">Machine Learning</span></div>
           <div class="tl-item upcoming"><span class="tl-label">Source Attribution</span></div>
           <div class="tl-item upcoming"><span class="tl-label">Public Dashboard</span></div>
-           <div class="tl-item upcoming"><span class="tl-label">Prototype V1</span></div>
+          <div class="tl-item upcoming"><span class="tl-label">Prototype V1</span></div>
         </div>
       </div>
     </div>
@@ -88,6 +79,23 @@
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
-</body>
-</html>
+<script>
+(function () {
+  const nav = document.querySelector('.nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  }
+})();
+</script>
+
+</body></html>

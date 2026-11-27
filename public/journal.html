@@ -1,28 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Journal — HAZE Mission Logs</title>
-<meta name="description" content="Engineering notebook entries documenting the HAZE project — experiments, prototypes, failures and breakthroughs." />
-<meta property="og:title" content="HAZE Journal — Mission Logs" />
-<meta property="og:description" content="Every experiment, redesign and failure, documented in the order it happened." />
-<meta property="og:type" content="article" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
+<meta name="description" content="Engineering notebook entries documenting the HAZE project — experiments, prototypes, failures and breakthroughs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-journal">
 <header class="nav">
   <div class="nav-inner">
     <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
     <button class="nav-toggle" aria-label="Toggle menu">≡</button>
     <nav class="nav-links">
       <a href="/home.html">Home</a>
-      <a href="/journal.html">Journal</a>
+      <a href="/journal.html" class="active">Journal</a>
       <a href="/prototypes.html">Products</a>
       <a href="/roadmap.html">Roadmap</a>
       <a href="/fellowship.html">Engineering Fellowship</a>
@@ -33,31 +26,29 @@
 </header>
 
 <main>
-  <section class="container" style="padding-top:140px; padding-bottom:40px">
-    <span class="section-eyebrow">Journal</span>
-    <h1 class="section-title" style="font-size:clamp(36px,5vw,60px); max-width:14ch">Mission logs from the workbench.</h1>
-    <p class="section-lead">A running notebook of thinking, experiments, and dead ends. Written in the order they happened</p>
+  <section class="container page-head">
+    
+    <h1 class="section-title">Mission logs from the workbench.</h1>
+    <p class="section-lead">A running notebook of thinking, experiments, and dead ends. Written in the order they happened.</p>
 
     <div class="journal-list">
-      <a class="log-card reveal" href="#001">
+      <a class="log-card" href="#001">
         <div class="log-meta"><span class="num">001</span>22 Jul 2026 · Update</div>
         <div class="log-body">
           <h3>The Beginning</h3>
-          <p>With the rise of air pollution in India I noticed the different ways in which pollution affected public health while smog altered the landscape of our national capital. I noticed the unavalibilty of accurate data pinpointing pollution sources affected efficient policy making. That is the problem i wanted to fix with haze
-
-</p>
+          <p>With the rise of air pollution in India I noticed the different ways in which pollution affected public health while smog altered the landscape of our national capital. I noticed the unavailability of accurate data pinpointing pollution sources affected efficient policy making. That is the problem I wanted to fix with HAZE.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#002">
+      <a class="log-card" href="#002">
         <div class="log-meta"><span class="num">002</span>22 Jul 2026 · Update</div>
         <div class="log-body">
           <h3>The Problem</h3>
-          <p>While working on this, I ran into a problem I hadn't anticipated. I realized that while particulate matter can be measured accurately, attributing it to a specific emission source in real time is a much harder and still a largely unsolved problem. This limitation makes it challenging to identify and hold individual emission sources accountable. Separating one construction site's contribution from traffic, other nearby sources, and background pollution turns out to be an ongoing research, not something I could solve through sensor placement, guesswork using wind direction or any sort of engineering alone. </p>
+          <p>While working on this, I ran into a problem I hadn't anticipated. I realized that while particulate matter can be measured accurately, attributing it to a specific emission source in real time is a much harder and still a largely unsolved problem. Separating one construction site's contribution from traffic, other nearby sources, and background pollution turns out to be ongoing research, not something I could solve through sensor placement or guesswork using wind direction alone.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#004">
+      <a class="log-card" href="#004">
         <div class="log-meta"><span class="num">004</span>25 Jul 2026 · Update</div>
         <div class="log-body">
           <h3>Learning electronics from zero</h3>
@@ -65,255 +56,77 @@
         </div>
       </a>
 
-      <a class="log-card reveal" href="#005">
+      <a class="log-card" href="#005">
         <div class="log-meta"><span class="num">005</span>1 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Lumped Abstractions</h3>
-          <p>The lumped abstraction is the hall pass that lets me draw circuits in the first place. It says that I can treat wires as ideal and ignore electromagnetic fields as long as the circuit is small compared to the wavelength of the signals in it. 9600 baud UART is a wavelength of kilometers, so a 15 cm sensor cable is just a wire . For HAZE that holds comfortably. It would not work for radio frequencies or very fast edges that I do not plan to use.</p>
+          <p>The lumped abstraction is the hall pass that lets me draw circuits in the first place. It says that I can treat wires as ideal and ignore electromagnetic fields as long as the circuit is small compared to the wavelength of the signals in it. 9600 baud UART is a wavelength of kilometers, so a 15 cm sensor cable is just a wire. For HAZE that holds comfortably.</p>
         </div>
       </a>
-      <a class="log-card reveal" href="#006">
+
+      <a class="log-card" href="#006">
         <div class="log-meta"><span class="num">006</span>2 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>UART/start bit</h3>
-          <p>UART does not have a clock wire, both ends agree on the baud rate and use their own timers to sample the incoming data. This is how PMS5003 and ESP32 communicate at 9600 baud without a clock line, the receiver resets its timer on the falling edge of the start bit for every byte. One bit is 104 µs long, meaning that the whole 10-bit frame takes 1.04 ms. If the baud rates are mismatched communication becomes impossible; TX on one end is RX on the other . The easiest test for a working connection is a loopback.</p>
+          <p>UART does not have a clock wire; both ends agree on the baud rate and use their own timers to sample the incoming data. This is how PMS5003 and ESP32 communicate at 9600 baud without a clock line, resetting the receiver timer on the falling edge of the start bit for every byte.</p>
         </div>
-       </a>
-      
-      <a class="log-card reveal" href="#007">
+      </a>
+
+      <a class="log-card" href="#007">
         <div class="log-meta"><span class="num">007</span>3 Aug 2026 · Learning outcome</div>
         <div class="log-body">
           <h3>Working of a scattering PM sensor</h3>
-          <p>The sensor shines a laser beam through an air sample and measures how much light is scattered by particles in it. The size of a particle contributes to define how much light is scattered to determine the size distribution. The signal is used to derive the mass concentration of particles under the assumption of a density and optical cross-section as well as a defined size distribution. PM2.5 is a mass concentration, and it has been extrapolated from this size distribution, so any other particles in the way will be counted as PM2.5 with reduced accuracy.</p>
+          <p>The sensor shines a laser beam through an air sample and measures how much light is scattered by particles in it. The size of a particle defines how much light is scattered to determine the size distribution, which is used to derive mass concentration under assumptions of density and optical cross-section.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#008">
-        <div class="log-meta"><span class="num">008</span>4 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>KCL and KVL</h3>
-          <p>Most electronics is analyzed using Kirchhoff’s laws: conservation of charge gives me KCL, conservation of energy gives me KVL. These are used together to get a voltage divider, e.g. for ESP32 pins that are 3.3 V tolerant, if I have a 5 V signal this is a case for a divider, i.e. a pair of resistors that will bring the voltage down. A 10 kΩ and 20 kΩ resistor on 3.3 V will give me 2.2 V on the 20 kΩ resistor. For PMS5003 the 3.3 V is already the supply voltage; no need for a level shifter.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#009">
-        <div class="log-meta"><span class="num">009</span>6 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Manual decode of a PMS5003 packet</h3>
-          <p>The first two bytes of a PMS5003 packet are 0x42 followed by 0x4D, then there’s the length field and the payload with mass concentrations and particle counts, and a 16-bit checksum that is the sum of all previous bytes. The manual calculation of the checksum will help me confirm that the parser correctly processes the received data. The datasheet should specify which fields to use for the concentration calculation; the HAZE firmware will need to select between the standard and the atmospheric ones.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#010">
-        <div class="log-meta"><span class="num">010</span>7 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>ADC and quantization</h3>
-          <p>An N-bit ADC has 2^N intervals, with steps of approximately Vref / 2^N. For the 3.3 V 12-bit ESP32 it is 0.8 mV; anything finer is beyond the resolution and will not be captured by the ADC. The ESP32’s ADC is non-linear at the ends, so the calibration procedure uses a multimeter to find the conversion function from counts to volts. The same procedure is useful when working with a voltage divider: the divider’s output is only a fair representation of the measured voltage if it is not loaded by a too-high impedance.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#011">
-        <div class="log-meta"><span class="num">011</span>8 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Superposition and Thevenin/Norton</h3>
-          <p>It is easy to forget that when using linear circuits, I can convert any two-terminal network to a single current source and a parallel resistor. For example, a voltage divider of 3.3 V with 10 kΩ resistors becomes a 1.65 V source with a 5 kΩ resistor. Connecting a 10 kΩ load will give me 1.1 V across it. When driving an ADC, a high-impedance source needs to be attenuated; I should check the input impedance of the ADC to see if it is compatible with a voltage divider.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#012">
-        <div class="log-meta"><span class="num">012</span>23 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3> I2C and the BME280</h3>
-          <p>2C uses an open collector with a pull-up resistor for the clock, and another open collector for the data, and each device on the bus has an address. This is different from UART, but there is no baud-rate miss-match problem. To check what is on the bus, I can read the chip ID register: 0x60 is BME280, 0x58 is BMP280. This matters because a wrongly identified BMP280 does not have a humidity sensor, defeating the purpose of humidity compensation.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#013">
-        <div class="log-meta"><span class="num">013</span>24 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Capacitors and First order systems</h3>
-          <p>A capacitor does not allow for an instantaneous change in voltage. This means that the charging curve of an RC circuit is exponential, with a time constant of τ=RC. For R=10 kΩ and C=10 µF it is 0.1 s; the capacitor will have 63% of its final charge after 0.1 s, and 99% after 0.5 s. The same curve describes the response of a system to a step input. With a larger time constant it has better low-pass characteristics but worse lag, e.g. the PM2.5 averages. For my readings, a longer time constant may give a reasonable lag.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#014">
-        <div class="log-meta"><span class="num">014</span>25 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Sampling, timing, and warm up</h3>
-          <p>A timestamp is only as good as the moment when it has been recorded. When I stamp a packet with a time when it arrives, the processing delay is added on top of the propagation delay. The contents of the packet may need more time to stabilize: The PMS5003 averages over some time to get a reading. The same sensor has to be warmed up, and the first samples should be discarded. The distribution of the time between consecutive samples demonstrates the quality of the sampling process.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#015">
-        <div class="log-meta"><span class="num">015</span>26 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Humidity sensitivity</h3>
-          <p>The size of hygroscopic particles depends on the ambient humidity. A particle of dust will absorb water and become significantly larger under high RH. The same particle will scatter more light, and therefore an optical sensor will report a higher mass concentration of particles. This is a systematic effect that can be compensated with some information about humidity. This is why a BME280 is useful even if it is not used for temperature compensation.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#016">
+      <a class="log-card" href="#016">
         <div class="log-meta"><span class="num">016</span>26 Aug 2026 · Update</div>
         <div class="log-body">
           <h3>Prototype V0</h3>
-          <p>I designed my very first Prototpye, V0. By training machine learning models on lab grade source labelled data of different PM samples Haze V0 compares indrect features of particulate matter measured through calibrated low cost sensors with different source labbeled datasets to determine the source of particulate pollution </p>
+          <p>I designed my very first Prototype, V0. By training machine learning models on lab-grade source-labeled data of different PM samples, Haze V0 compares indirect features of particulate matter measured through calibrated low-cost sensors with source-labeled datasets to determine the source of particulate pollution.</p>
         </div>
       </a>
 
-
-      <a class="log-card reveal" href="#017">
-        <div class="log-meta"><span class="num">017</span>27 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Critical reading of the datasheet</h3>
-          <p>A datasheet only provides guarantees, it does not include what may go wrong. Typical accuracy figures and their conditions do not include humidity effects, long-term stability, or variations between units. Everything not stated is a possibility, and I should test the sensor for these failure modes. It will give me a page to write about the limitations of the sensor.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#018">
-        <div class="log-meta"><span class="num">018</span>29 Aug 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Sinusoidal steady-state</h3>
-          <p>Representing sinusoidal functions as phasors makes the analysis of linear circuits algebraic. The important part about phasors is that a circuit with a sinusoidal input of a given frequency responds with the same frequency, just a different amplitude and phase. For an RC circuit with a resistor and a capacitor in series, the magnitude of the response is 0.707 at the cutoff frequency and decreases at -20 dB per decade, and the phase lag is -45 degrees at the cutoff and approaches -90 degrees.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#019">
-        <div class="log-meta"><span class="num">019</span>12 Sep 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Accuracy, precision and bias</h3>
-          <p>Accuracy is about being close to the true value, but it has a bias component. Precision is repeatability; it equals the standard deviation of a set of measurements. A sensor can be accurate but have precision issues. Bias is rarely fixed, but can be partially addressed with calibration. Noise, on the other hand, is a precision issue but can be largely eliminated with averaging. I need to find the mean, standard deviation and bias of the sensor’s measurement.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#020">
-        <div class="log-meta"><span class="num">020</span>13 Sep 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>The impedence model</h3>
-          <p>Impedance model allows me to use the same approach for resistors, inductors and capacitors. For the latter two, impedance is a function of frequency: Z_C=jX_C=-j/ωC, Z_L=jX_L=jωL. This means that at DC a capacitor is an open circuit, and a capacitor at high frequencies is a short. This allows decoupling capacitors to filter out high-frequency noise while having no effect on a DC bias. The same model describes an RC circuit as a low-pass filter with a cutoff frequency f_c=1/(2πRC).</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#021">
-        <div class="log-meta"><span class="num">021</span>28 Sep 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Linear regression of my data</h3>
-          <p>The output of a linear regression with a line gives me a slope, an intercept and an R squared. The R squared is a measure of goodness of fit that indicates how much variance is accounted for by the fit line. However, it says little about the line itself, only that a poor fit has a low R squared. For this reason, a plot of residuals is more informative: a non-random pattern in them indicates that the model is incorrect; curvature, trends or other structures show that the model does not describe the data well. A model with a high R squared but a pattern in residuals is also not useful.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#022">
-        <div class="log-meta"><span class="num">022</span>29 Sep 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Filters</h3>
-          <p>A filter is a frequency-dependent voltage divider. Its cutoff frequency is determined by the point where its gain drops by 3 dB compared to the pass-band. For example, a 16 kΩ, 1 µF high-pass filter will have a gain of 0.2 at 50 Hz, attenuating mains noise, but will pass a slow sensor signal with a 10 Hz cutoff frequency. An equivalent digital filter would have the same characteristics, with the same trade-offs of lag and noise reduction.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#023">
-        <div class="log-meta"><span class="num">023</span>30 Sep 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Power up and deploy</h3>
-          <p>The fan and laser diode in the PMS5003 are the main power consumers, but the average current determines the lifetime of the laser diode. Duty-cycling the sensor reduces the average current, with a penalty of a longer warm-up period. Brownouts should be visible in the logged data. Decoupling capacitors help stabilize the power supply, and the impedance model tells me why a noisy rail leads to a noisy sensor.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#024">
-        <div class="log-meta"><span class="num">024</span>Oct 1 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Multivariate regressions</h3>
-          <p>Adding predictors to a regression model allows me to separate their effects. The coefficients will show me how much each contributes to the outcome, controlling for the other variables. If the predictors are not independent, which can happen if they are temperature and humidity, I will need to take it into account. A change in the sign of a coefficient may indicate that something is wrong with the model.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#025">
-        <div class="log-meta"><span class="num">025</span>Oct 2 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>The op-amp abstraction</h3>
-          <p>An op-amp with negative feedback has a very high gain, which allows a circuit to have a predictable response based on resistors. Because of the high gain, the two inputs are at approximately the same voltage, and no current flows into the op-amp. This allows me to ignore their value and focus on the resistor ratios. The same abstraction allows me to build amplifiers, filters and other circuits. The op-amp model is good at describing amplifiers at low frequencies, but not near the supply rails, or when dealing with the input bias currents or the offset voltage.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#026">
-        <div class="log-meta"><span class="num">026</span>Oct 3 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Error propagation and uncertainty</h3>
-          <p>Independent errors add up, but their contributions are squared and summed, not added directly. The individual terms dominate the sum, with the largest error determining the result. Every step I take adds uncertainty, including amplification or attenuation stages, calibration procedures and other steps. A calibrated measurement is not useful if I do not report an uncertainty.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#027">
-        <div class="log-meta"><span class="num">027</span>Oct 4 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Op-amp circuits</h3>
-          <p>The basic circuits are a buffer, an inverting amplifier with gain -Rf/Rin, a non-inverting amplifier with gain 1+Rf/Rg, and a summing amplifier. Buffers are needed if a sensor cannot drive the next stage directly due to a high output impedance, and amplifiers provide additional gain. PMS5003 and BME280 sensors are digital and do not need them, but a sensor with an analog output may need an amplifier to increase its gain or offset. I should review the datasheet for such a sensor before working with it.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#028">
-        <div class="log-meta"><span class="num">028</span>Oct 8 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Experimental design and train/test discipline</h3>
-          <p>Time-series data has temporal structure, and a random train/test split will lead to data leakage. A random split will have the test set be more similar to the training set, leading to overly optimistic results. To avoid this, time-series data should be split into contiguous blocks for training and testing. A colocated run should include a variety of conditions for the sensor, representing the range of humidity, temperature and PM values that it will encounter. The details of the run, including its duration and how the data will be split, must be determined ahead of time.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#029">
-        <div class="log-meta"><span class="num">029</span>Oct 8 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Op-amps and positive feedback</h3>
-          <p>Positive feedback causes the output of an op-amp to saturate, and can be useful for creating comparators with hysteresis. Positive feedback is also used to create Schmitt triggers, which improves noise immunity by having different thresholds for the rising and falling edges. For example, a comparator with a 9 kΩ feedback resistor and a 1 kΩ resistor to ground on ±5 V rails will switch at -0.5 V and +0.5 V, giving it 1 V of hysteresis. This is more useful for signals that are noisy around a threshold than for digital signals, which is why HAZE is not a high priority.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#030">
-        <div class="log-meta"><span class="num">030</span>Oct 9 2026 · Learning outcome</div>
-        <div class="log-body">
-          <h3>Cross-validation</h3>
-          <p>Cross-validation approximates the error of a model on unseen data by partitioning the data into segments and using each segment as a test set in turn. The cross-validated error can then be averaged across all segments. For time-series data, a cross-validation fold should be contiguous in time to avoid data leakage. By analogy with the train/test split, time-series data should be split using a block structure. In the next few lectures, I will analyze the effect of such a structure on the source attribution model.</p>
-        </div>
-      </a>
-
-      <a class="log-card reveal" href="#031">
-        <div class="log-meta"><span class="num">031</span>Oct 20 2026 · Update</div>
+      <a class="log-card" href="#031">
+        <div class="log-meta"><span class="num">031</span>20 Oct 2026 · Update</div>
         <div class="log-body">
           <h3>Prototype V1</h3>
-          <p>I designed Prototype V1 as an advancement to the existing prototype V0. Prototype V1 builds on the existing core source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site, along with added wind direction sensors. The outputs of these nodes, with the measured wind direction and real-time measurements of pollutants using the existing core model, will be used to create a real-time spatiotemporal air pollution map that reflects the pollutant concentrations and distributions across the area in real time. This dynamic representation will allow a more precise identification of likely pollution sources and estimation of their contributions by analyzing spatial concentration gradients, temporal variations and pollutant dispersion patterns.</p>
+          <p>I designed Prototype V1 as an advancement to Prototype V0. Prototype V1 builds on the core source-attribution model by adding a distributed network of air-quality monitoring nodes over a designated site, along with wind direction sensors, to create a real-time spatiotemporal air pollution map.</p>
         </div>
       </a>
-      
-      <a class="log-card reveal" href="#032">
-        <div class="log-meta"><span class="num">032</span>Oct 27 2026 · Update</div>
+
+      <a class="log-card" href="#032">
+        <div class="log-meta"><span class="num">032</span>27 Oct 2026 · Update</div>
         <div class="log-body">
           <h3>The Asymmetry of Blame</h3>
-          <p>I had thought that this issue only impacts citizens, however looking at construction sites around Delhi NCR, it is clear that contractors are also suffering from this very issue.<br>During the winter period when crops are burnt throughout the region and weather inversion occurs, the local ambient air exceeds 400-500μg/m3. With only a basic single point monitoring device installed to measure the pollution, any difference between regional smog and site generated dust cannot be identified. This causes sudden orders from the CAQM to stop work with builders losing between ₹1.5-5 Lakh ($1,800-$6,000) per day.<br>To abide by these rules, anti-smog cannons are installed and operated 24/7 using 15-30kVa diesel generators. This results in 80-120L of diesel being used each day. Additionally, tens of thousands of litres of water is wasted through the cannons as there is no established source data</p>
+          <p>Looking at construction sites around Delhi NCR, it is clear that contractors are also suffering from this issue. During winter crop burning and weather inversions, ambient air exceeds 400–500 µg/m³. With only a single-point monitor, regional smog cannot be separated from site dust, leading to sudden stop-work orders and 24/7 anti-smog cannon diesel waste.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#033">
-        <div class="log-meta"><span class="num">033</span>Oct 29 2026 · Update</div>
+      <a class="log-card" href="#033">
+        <div class="log-meta"><span class="num">033</span>29 Oct 2026 · Update</div>
         <div class="log-body">
           <h3>The Solution: Haze Grid Pro</h3>
-          <p>Haze Grid Pro, a 3-4 node mesh system was designed to prevent random penalties for shutting off the system and indiscriminate water spraying.<br>The nodes were solar powered ESP32-S3 units with size binning optics (PMS5003), triple gas sensor (MiCS-6814 for sensing CO/NO/NH3), microclimate sensors (BME280) and Analogue wind direction sensor.<br>By calculating spatial gradients and gas/particle ratios, the 3 gas arrays can differentiate between internal plumes. It is able to separate the mineral dust (PM10\PM2.5) from diesel fumes and regional crop smoke. There is also a relay fitted inside the unit, which hooks up to the mist cannon panel. The system will only activate the mist spray if there is more than 75 ug/m^3 of dust detected inside.<br>This identifies leaks at the specific location before they can travel outside. This protects the builders from unfair regulations stopping them from working. The system also saves up to 40-55% on diesel and water due to the generator not having to run as much.</p>
+          <p>Haze Grid Pro, a 3–4 node mesh system, uses solar-powered ESP32-S3 units with size-binning optics (PMS5003), triple gas sensors (MiCS-6814), microclimate sensors (BME280), and wind direction sensors to separate mineral dust from diesel fumes and regional smoke, triggering misting only when site dust crosses 75 µg/m³.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#034">
-        <div class="log-meta"><span class="num">034</span>Oct 29 2026 · Update</div>
+      <a class="log-card" href="#034">
+        <div class="log-meta"><span class="num">034</span>29 Oct 2026 · Update</div>
         <div class="log-body">
           <h3>Haze Duo—for smaller sites</h3>
-          <p>HAZE Duo uses two solar powered cellular nodes installed at opposite boundaries of your site (upwind and downwind). It provides true net dust emissions from your site by continuously calculating the difference between background regional smog coming into the site and the air going out, hence isolating the emissions from the site providing compliance evidence</p>
+          <p>HAZE Duo uses two solar-powered cellular nodes installed at opposite boundaries of your site (upwind and downwind). It provides true net dust emissions from your site by continuously calculating the difference between background regional smog coming into the site and the air going out.</p>
         </div>
       </a>
 
-      <a class="log-card reveal" href="#035">
-        <div class="log-meta"><span class="num">035</span>Oct 29 2026 · Update</div>
+      <a class="log-card" href="#035">
+        <div class="log-meta"><span class="num">035</span>29 Oct 2026 · Update</div>
         <div class="log-body">
           <h3>Haze Legal Sentinel—For High Risk Infrastructure</h3>
-          <p>Haze Sentinel combines the full multi-node Haze Grid Pro spatiotemporal mesh along with the Haze Duo dual sensor network and an automated compliance report generator specifically tailored for high-risk mega-projects. It streams calibrated data directly to state pollution board portals and auto-generates timestamped Legal Defense Dossiers to prove that external smog was the cause of boundary spikes. It logs automated misting cannon actions to demonstrate legal due diligence and shield contractors from arbitrary stop-work orders and multiple-lakh NGT fines.</p>
+          <p>Haze Sentinel combines the multi-node Haze Grid Pro spatiotemporal mesh with the Haze Duo dual sensor network and an automated compliance report generator for high-risk mega-projects, producing timestamped Legal Defense Dossiers and logging automated misting actions.</p>
         </div>
       </a>
-      
-      
     </div>
   </section>
 </main>
@@ -334,6 +147,23 @@
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
-</body>
-</html>
+<script>
+(function () {
+  const nav = document.querySelector('.nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  }
+})();
+</script>
+
+</body></html>

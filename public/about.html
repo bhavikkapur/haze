@@ -1,21 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — HAZE open engineering initiative</title>
-<meta name="description" content="HAZE is an open engineering initiative documenting the long-term journey of building environmental accountability technology." />
-<meta property="og:title" content="About HAZE" />
-<meta property="og:description" content="An engineering journey documented in the open — every experiment, redesign, and failure." />
-<meta property="og:type" content="article" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
+<meta name="description" content="HAZE is an open engineering initiative documenting the long-term journey of building environmental accountability technology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-about">
 <header class="nav">
   <div class="nav-inner">
     <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
@@ -26,17 +19,17 @@
       <a href="/prototypes.html">Products</a>
       <a href="/roadmap.html">Roadmap</a>
       <a href="/fellowship.html">Engineering Fellowship</a>
-      <a href="/about.html">About</a>
+      <a href="/about.html" class="active">About</a>
       <a class="gh" href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub ↗</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <section class="container" style="padding-top:140px; padding-bottom:40px">
+  <section class="container page-head">
     <div class="prose">
-      <span class="section-eyebrow">About</span>
-      <h1 class="section-title" style="font-size:clamp(36px,5vw,56px); max-width:none">An open-source environmental tech venture.</h1>
+      
+      <h1 class="section-title">An open-source environmental tech venture.</h1>
 
       <p>HAZE is an environmental technology venture focusing on tackling one of the largest issues facing India: air pollution.</p>
 
@@ -48,7 +41,7 @@
       <p>While proprietary sensors are designed to make it impossible to interrogate the underlying assumptions, and therefore the data becomes invalid once challenged in a legal setting. Haze is completely transparent. By making our every step and faults public, we are able to demonstrate that affordable hardware can be used to create verifiable evidence that can withstand scrutiny from regulators.</p>
 
       <h3>How to follow along</h3>
-      <p class="muted">Read the <a href="/journal.html" style="color:var(--accent)">Journal</a> for the running notebook, the <a href="/prototypes.html" style="color:var(--accent)">Prototypes</a> page for hardware, and the <a href="/roadmap.html" style="color:var(--accent)">Roadmap</a> for what is next. Everything is MIT licensed and mirrored on <a href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer" style="color:var(--accent)">GitHub</a>.</p>
+      <p class="muted">Read the <a class="link-navy" href="/journal.html">Journal</a> for the running notebook, the <a class="link-navy" href="/prototypes.html">Prototypes</a> page for hardware, and the <a class="link-navy" href="/roadmap.html">Roadmap</a> for what is next. Everything is MIT licensed and mirrored on <a class="link-navy" href="https://github.com/bhavikkapur/haze" target="_blank" rel="noreferrer">GitHub</a>.</p>
     </div>
   </section>
 </main>
@@ -69,6 +62,23 @@
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
-</body>
-</html>
+<script>
+(function () {
+  const nav = document.querySelector('.nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  }
+})();
+</script>
+
+</body></html>

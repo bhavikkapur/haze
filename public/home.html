@@ -1,27 +1,20 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HAZE — Building pollution accountability from the ground up</title>
-<meta name="description" content="HAZE is an open engineering initiative documenting the journey of building technology that improves environmental accountability." />
-<meta property="og:title" content="HAZE — Open engineering for environmental accountability" />
-<meta property="og:description" content="An open engineering initiative documenting every experiment, prototype, failure and breakthrough." />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
+<meta name="description" content="HAZE is an open engineering initiative documenting the journey of building technology that improves environmental accountability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-home">
 <header class="nav">
   <div class="nav-inner">
     <a href="/home.html" class="brand">HAZE<span class="dot">.</span></a>
     <button class="nav-toggle" aria-label="Toggle menu">≡</button>
     <nav class="nav-links">
-      <a href="/home.html">Home</a>
+      <a href="/home.html" class="active">Home</a>
       <a href="/journal.html">Journal</a>
       <a href="/prototypes.html">Products</a>
       <a href="/roadmap.html">Roadmap</a>
@@ -43,52 +36,38 @@
   </section>
 
   <section class="container reveal">
-    <span class="section-eyebrow">Why in the open?</span>
     <div class="two-col">
       <h2 class="section-title">Unverifiable data is unacceptable.</h2>
-      <div>
-<p>While proprietary sensors are designed to make it impossible to interrogate the underlying assumptions, and therefore the data becomes invalid once challenged in a legal setting. Haze is completely transparent. By making our every step and faults public, we are able to demonstrate that affordable hardware can be used to create verifiable evidence that can withstand scrutiny from regulators.</p>
-      
+      <div class="col-body">
+        <p>Proprietary sensors are designed to make it impossible to interrogate their underlying assumptions, which renders their data invalid the moment it is challenged in a legal setting.</p>
+        <p>Haze is completely transparent. By making every step, calibration curve, and fault public, we demonstrate that affordable hardware can create verifiable evidence that withstands scrutiny from regulators.</p>
+      </div>
     </div>
   </section>
 
   <section class="container reveal">
-    <span class="section-eyebrow">Now</span>
     <h2 class="section-title">Where the project stands today.</h2>
-    <div class="now-card">
-      <div class="now-header">
-        <span>Status Report</span>
-        <span class="now-live"><span class="pulse"></span> Live</span>
+    <div class="news-dateline">
+      <span>Last updated 18 October 2026</span>
+    </div>
+    <div class="news-columns-2">
+      <div class="news-col">
+        <h3>Prototype V0 &amp; Calibration</h3>
+        <p>With Prototype V0 active in the field logging baseline particulate matter readings, our immediate focus is sensor calibration—aligning low-cost optical hardware with reference-grade instruments so affordable nodes deliver reliable, repeatable accuracy under real ambient conditions.</p>
       </div>
-      <div class="now-item">
-        <div class="label">Current focus</div>
-        <div class="value">Calibration</div>
-      </div>
-      <div class="now-item">
-        <div class="label">Current prototype</div>
-        <div class="value accent">V0</div>
-      </div>
-      <div class="now-item">
-        <div class="label">Current goal</div>
-        <div class="value">Calibrating low quality sensors to get accurate results</div>
-      </div>
-      <div class="now-item">
-        <div class="label">Latest update</div>
-        <div class="value">Reaching Out to labs to secure access to reference-grade equipment for sensor calibration along with lab grada source labelled data for machine learning</div>
-      </div>
-      <div class="now-footer">
-        <span>Last updated · 18 October 2026</span>
-        <span>Mission 001</span>
+      <div class="news-col">
+        <h3>Lab Outreach &amp; ML Baselines</h3>
+        <p>Our goal is to establish rigorous calibration baselines that produce measurements regulators and communities can trust. To get there, we are currently reaching out to research labs to secure access to reference-grade calibration equipment alongside lab-grade, source-labeled datasets for machine learning.</p>
       </div>
     </div>
   </section>
 
   <section class="container reveal">
-    <span class="section-eyebrow">Journey</span>
+    
     <h2 class="section-title">The path so far.</h2>
     <p class="section-lead">Everything is documented in the order it happened, completed and current.</p>
 
-    <div class="timeline-columns" style="margin-top:56px">
+    <div class="timeline-columns mt-56">
       <div class="timeline-group">
         <h4>Completed</h4>
         <div class="timeline">
@@ -97,14 +76,13 @@
           <div class="tl-item done"><span class="tl-label">Prototype V0</span></div>
           <div class="tl-item done"><span class="tl-label">Outdoor Testing</span></div>
         </div>
-        <h4 style="margin-top:40px">Current</h4>
+        <h4 class="mt-40">Current</h4>
         <div class="timeline">
           <div class="tl-item current"><span class="tl-label">Calibration</span><span class="tl-status">In progress</span></div>
           <div class="tl-item current"><span class="tl-label">Learning Electronics</span><span class="tl-status">In progress</span></div>
           <div class="tl-item current"><span class="tl-label">Professor Outreach</span><span class="tl-status">In progress</span></div>
-
         </div>
-        <h4 style="margin-top:40px">Upcoming</h4>
+        <h4 class="mt-40">Upcoming</h4>
         <div class="timeline">
           <div class="tl-item upcoming"><span class="tl-label">Machine Learning</span></div>
           <div class="tl-item upcoming"><span class="tl-label">Source Attribution</span></div>
@@ -117,18 +95,17 @@
   </section>
 
   <section class="container reveal">
-    <span class="section-eyebrow">Mission Logs</span>
+    
     <h2 class="section-title">From the notebook.</h2>
-    <a class="log-card" href="/journal.html" style="margin-top:40px">
+    <a class="log-card mt-40" href="/journal.html">
       <div class="log-meta">
         <span class="num">001</span>
         22 Jul 2026
       </div>
       <div class="log-body">
         <h3>The Beginning</h3>
-        <p> It was when I saw construction sites in my area with visible dust emissions and uncovered sites with no accountability that the idea clicked. I wanted the residents living nearby and the construction workers whose health was compromised to be able to take action. 
-While air quality monitoring websites did exist they did not attribute pollution to specific sources such as construction sites and thus the residents had no real proof to hold the concerned authorities accountable.
-</p>
+        <p>It was when I saw construction sites in my area with visible dust emissions and uncovered sites with no accountability that the idea clicked. I wanted the residents living nearby and the construction workers whose health was compromised to be able to take action.
+While air quality monitoring websites did exist they did not attribute pollution to specific sources such as construction sites and thus the residents had no real proof to hold the concerned authorities accountable.</p>
       </div>
       <div class="log-cta">Read more →</div>
     </a>
@@ -151,6 +128,24 @@ While air quality monitoring websites did exist they did not attribute pollution
   </div>
 </footer>
 
-<script src="/js/script.js"></script>
-</body>
-</html>
+<script>
+(function () {
+  const nav = document.querySelector('.nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  }
+})();
+</script>
+
+
+</body></html>
